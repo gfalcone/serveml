@@ -14,8 +14,6 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: mflow
-      MYSQL_PASSWORD: mlflow
       MYSQL_DATABASE: mlflow
     ports:
     - "3306:3306"

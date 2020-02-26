@@ -1,2 +1,2 @@
-mlflow==1.6.0
-scikit-learn
+mlflow[extras]==1.6.0
+mysqlclient
