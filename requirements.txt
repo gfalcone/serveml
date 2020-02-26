@@ -1,1 +1,2 @@
 mlflow==1.6.0
+scikit-learn
