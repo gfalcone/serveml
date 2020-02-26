@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mlflow:
+    build: .
+    ports:
+    - "5000:5000"
+    links:
+    - mysql
+    depends_on:
+    - "mysql"
+
+  mysql:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: mflow
+      MYSQL_PASSWORD: mlflow
+      MYSQL_DATABASE: mlflow
+    ports:
+    - "3306:3306"
