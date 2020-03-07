@@ -17,7 +17,7 @@ mlflow
 First of all, you need to define your API into a Python file:
 
 ```python
-from mlserve.models import MlflowModel
+from mlserve.loaders.models import MlflowModel
 from mlserve.api import Api
 
 model = MlflowModel('iris_classifier')

@@ -1,6 +1,7 @@
 version: '3'
 services:
   mlflow:
+    env_file: .env
     build: .
     ports:
     - "5000:5000"
@@ -8,6 +9,8 @@ services:
     - mysql
     depends_on:
     - "mysql"
+    volumes:
+    - ./:/app
 
   mysql:
     image: mariadb
