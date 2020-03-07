@@ -54,7 +54,7 @@ class MlflowModelLoader(object):
 
         if model_directory not in artifacts:
             raise ValueError(
-                'Could not find an artifact named "model" linked to this run_id'  # NOQA
+                'Could not find an artifact named {} linked to this run_id'.format(model_directory)  # NOQA
             )
 
         # downloading artifact to temporary directory
@@ -74,11 +74,3 @@ class MlflowModelLoader(object):
         model_path = os.path.join(tmp_directory, model_directory)
         logging.info('Loading model {}'.format(model_path))
         return Model().load(model_path)
-
-
-if __name__ == '__main__':
-    model = MlflowModelLoader(
-        'http://localhost:5000',
-    )
-    print(model.load_model('my_model', 'model', '/tmp'))
-    # print(model.mlflow_client.get_registered_model_details('my_model'))
