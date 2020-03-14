@@ -1,2 +1,4 @@
 mlflow[extras]==1.6.0
 mysqlclient
+fastapi
+uvicorn
