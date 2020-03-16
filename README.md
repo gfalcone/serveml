@@ -20,7 +20,7 @@ First of all, you need to define your API into a Python file:
 from mlserve.api import ApiBuilder
 from mlserve.ml.model import AbstractModel
 from mlserve.io import pydantic_model_to_pandas, pandas_to_dict
-from mlserve.loaders.mlflow import MlflowModelLoader
+from mlserve.mlflow import MlflowModelLoader
 from pydantic import BaseModel
 
 # Set MLFlow model loader and load model

@@ -1,18 +1,27 @@
 import pandas as pd
-import json
+from pydantic import BaseModel
 
 
-def json_to_pandas(json_input):
-    return dict_to_pandas(json.loads(json_input))
-
-
-def pydantic_model_to_pandas(pydantic_model_input):
+def pydantic_model_to_pandas(pydantic_model_input: BaseModel):
+    """
+    Function that transforms <pydantic.BaseModel> child objects to
+    <pandas.DataFrame> objects
+    :param pydantic_model_input: Input validator for API
+    """
     return dict_to_pandas(pydantic_model_input.dict())
 
 
-def dict_to_pandas(dictionary_input):
+def dict_to_pandas(dictionary_input: dict):
+    """
+    Function that transforms a dictionary into a <pandas.DataFrame>
+    :param dictionary_input: Python dictionary
+    """
     return pd.DataFrame.from_dict([dictionary_input])
 
 
 def pandas_to_dict(df: pd.DataFrame):
+    """
+    Function that transforms a <pandas.DataFrame> object to a Python Dictionary
+    :param df: <pd.DataFrame> object
+    """
     return df.to_dict()

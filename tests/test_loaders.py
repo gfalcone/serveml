@@ -5,7 +5,7 @@ from mlflow.models import Model
 
 from mlflow.exceptions import RestException
 
-from mlserve.loaders.mlflow import MlflowModelLoader
+from mlserve.mlflow import MlflowModelLoader
 
 
 class TestMlflowModelLoader(unittest.TestCase):

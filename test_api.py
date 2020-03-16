@@ -1,25 +1,17 @@
 from mlserve.api import ApiBuilder
-from mlserve.ml.model import AbstractModel
-from mlserve.io import pydantic_model_to_pandas, pandas_to_dict
-from mlserve.loaders.mlflow import MlflowModelLoader
+from mlserve.loader import load_mlflow_model
+from mlserve.ml.sklearn import SklearnModel
 from pydantic import BaseModel
 
-# Set MLFlow model loader and load model
-model_loader = MlflowModelLoader('http://localhost:5000')
-model = model_loader.load_model('models:/my_model/Production')
+CONFIGURATION_PATH = 'api.cfg'
 
-
-# Implement methods for prediction
-class SklearnModel(AbstractModel):
-    def _transform_input(self, input):
-        return pydantic_model_to_pandas(input)
-
-    def _apply_model(self, transformed_input):
-        return self.model.predict(transformed_input)
-
-    def _transform_output(self, output):
-        # we get a ndarray in output, converting it to a dictionary
-        return {'quality': output.item(0)}
+# load model
+model = load_mlflow_model(
+    # MlFlow model path
+    'models:/my_model/Production',
+    # MlFlow Tracking URI (optional)
+    'http://localhost:5000',
+)
 
 
 # Implement deserializer for input data
@@ -37,15 +29,7 @@ class WineComposition(BaseModel):
     volatile_acidity: int
 
 
-# Build API
-fast_api_options = {
-    'title': 'WineQualityApi',
-    'description': 'This API helps you determine if the quality of the Wine is good or not',  # NOQA
-    'version': '0.1.0'
-}
-
+# implement application
 app = ApiBuilder(
-    SklearnModel(model),
-    WineComposition,
-    fast_api_options
+    SklearnModel(model), WineComposition, CONFIGURATION_PATH
 ).build_api()
