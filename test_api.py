@@ -3,8 +3,6 @@ from mlserve.loader import load_mlflow_model
 from mlserve.ml.sklearn import SklearnModel
 from pydantic import BaseModel
 
-CONFIGURATION_PATH = 'api.cfg'
-
 # load model
 model = load_mlflow_model(
     # MlFlow model path
@@ -30,6 +28,4 @@ class WineComposition(BaseModel):
 
 
 # implement application
-app = ApiBuilder(
-    SklearnModel(model), WineComposition, CONFIGURATION_PATH
-).build_api()
+app = ApiBuilder(SklearnModel(model), WineComposition).build_api()

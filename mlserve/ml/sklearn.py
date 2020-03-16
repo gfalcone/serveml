@@ -38,4 +38,6 @@ class SklearnModel(AbstractModel):
             result = pandas_to_dict(output)
         elif isinstance(output, pd.Series):
             result = output.to_dict()
+        else:
+            result = None
         return {'result': result}

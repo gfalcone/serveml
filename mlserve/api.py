@@ -13,7 +13,7 @@ class ApiBuilder(object):
             self,
             model: AbstractModel,
             input_class,
-            configuration_path,
+            configuration_path=None,
     ):
         """
         :param model: <mlserve.ml.model.AbstractModel> object that inplements
@@ -27,7 +27,8 @@ class ApiBuilder(object):
         self.load_configuration(configuration_path)
 
     def load_configuration(self, configuration_path):
-        self.configuration.read(configuration_path)
+        if configuration_path is not None:
+            self.configuration.read(configuration_path)
 
     def build_api(self, kwargs: dict = None):
         """
