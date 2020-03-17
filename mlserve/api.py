@@ -36,7 +36,6 @@ class ApiBuilder(object):
         `/predict` endpoint and the `/feedback` endpoint.
         """
         # retrieve fastapi configuration
-        print(self.configuration)
         fastapi_configuration = (
             self.configuration['fastapi']
             if 'fastapi' in self.configuration.sections() else {}
