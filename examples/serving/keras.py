@@ -1,0 +1,43 @@
+from typing import List
+
+import pandas as pd
+
+from keras.preprocessing.text import Tokenizer
+from mlserve.api import ApiBuilder
+from mlserve.loader import load_mlflow_model
+from mlserve.predictions import GenericPrediction
+from pydantic import BaseModel
+
+from mlserve.io import dict_to_pandas, pandas_to_dict
+# load model
+model = load_mlflow_model(
+    # MlFlow model path
+    'models:/keras_model/1',
+    # MlFlow Tracking URI
+    'http://localhost:5000',
+)
+
+
+# Implement deserializer for input data
+class ReutersNewswireTopic(BaseModel):
+    sequence: List[int]
+
+
+# Implement prediction because this is a bit custom
+class CustomKerasApplication(GenericPrediction):
+    def _transform_input(self, input: ReutersNewswireTopic):
+        """
+        Transforms <ReutersNewswireTopic> object to <numpy.array>
+        """
+        max_words = 1000
+        tokenizer = Tokenizer(num_words=max_words)
+        x_train = tokenizer.sequences_to_matrix(
+            [input.sequence], mode='binary'
+        )
+        return pd.DataFrame(x_train)
+
+
+# implement application
+app = ApiBuilder(
+    CustomKerasApplication(model), ReutersNewswireTopic
+).build_api()

@@ -1,13 +1,13 @@
 from mlserve.api import ApiBuilder
 from mlserve.loader import load_mlflow_model
-from mlserve.ml.sklearn import SklearnModel
+from mlserve.predictions import GenericPrediction
 from pydantic import BaseModel
 
 # load model
 model = load_mlflow_model(
     # MlFlow model path
-    'models:/my_model/Production',
-    # MlFlow Tracking URI (optional)
+    'models:/sklearn_model/1',
+    # MlFlow Tracking URI
     'http://localhost:5000',
 )
 
@@ -28,4 +28,4 @@ class WineComposition(BaseModel):
 
 
 # implement application
-app = ApiBuilder(SklearnModel(model), WineComposition).build_api()
+app = ApiBuilder(GenericPrediction(model), WineComposition).build_api()

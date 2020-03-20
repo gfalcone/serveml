@@ -21,7 +21,7 @@ First of all, you need to define your API into a Python file, say `api.py`
 ```python
 from mlserve.api import ApiBuilder
 from mlserve.loader import load_mlflow_model
-from mlserve.ml.sklearn import SklearnModel
+from mlserve.predictions import GenericPrediction
 from pydantic import BaseModel
 
 # load model
@@ -49,7 +49,7 @@ class WineComposition(BaseModel):
 
 
 # implement application
-app = ApiBuilder(SklearnModel(model), WineComposition).build_api()
+app = ApiBuilder(GenericPrediction(model), WineComposition).build_api()
 ```
 
 Then to run it : 

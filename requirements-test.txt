@@ -1,0 +1,8 @@
+asynctest==0.13.0
+aiohttp==3.6.2
+torch==1.4.0
+torchvision==0.5.0
+Keras==2.3.1
+tensorflow==2.1.0
+xgboost==1.0.2
+fbprophet==0.6

@@ -1,13 +1,15 @@
 FROM python:3.7-buster
 
 COPY requirements.txt /tmp/
+COPY requirements-test.txt /tmp/
 
-RUN apt-get update && apt-get install -y mariadb-server nano less telnet && pip install -r /tmp/requirements.txt
+RUN apt-get update && apt-get install sqlite3 && pip install -r /tmp/requirements.txt
+
+# for testing
+RUN pip install -r /tmp/requirements-test.txt
+
+COPY . /app/
 
 WORKDIR /app
 
-ENV MLFLOW_TRACKING_URI=http://localhost:5000
-
-EXPOSE 5000
-
-CMD ["mlflow", "server", "--backend-store-uri", "mysql://root:root@mysql/mlflow", "--default-artifact-root", "s3://drivy-data-dev/mlflow/app/runs", "-h", "0.0.0.0"]
+CMD ["bash", "create_dev_environment.sh"]

@@ -24,4 +24,4 @@ def pandas_to_dict(df: pd.DataFrame):
     Function that transforms a <pandas.DataFrame> object to a Python Dictionary
     :param df: <pd.DataFrame> object
     """
-    return df.to_dict()
+    return df.to_dict('records')

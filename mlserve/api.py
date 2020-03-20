@@ -2,7 +2,8 @@ import configparser
 
 from fastapi import FastAPI
 
-from mlserve.ml import AbstractModel
+from mlserve.predictions import AbstractPrediction
+from mlserve.data_models import FeedbackModel
 
 
 class ApiBuilder(object):
@@ -11,8 +12,9 @@ class ApiBuilder(object):
     """
     def __init__(
             self,
-            model: AbstractModel,
-            input_class,
+            model: AbstractPrediction,
+            predict_input_class,
+            feedback_input_class=FeedbackModel,
             configuration_path=None,
     ):
         """
@@ -22,7 +24,8 @@ class ApiBuilder(object):
         `/predict` input validator
         """
         self.model = model
-        self.input_class = input_class
+        self.predict_input_class = predict_input_class
+        self.feedback_input_class = feedback_input_class
         self.configuration = configparser.ConfigParser()
         self.load_configuration(configuration_path)
 
@@ -48,10 +51,17 @@ class ApiBuilder(object):
         app = FastAPI(**fastapi_configuration)
 
         # adding a route for predict
-        input_class = self.input_class
+        predict_input_class = self.predict_input_class
 
-        @app.post("/predict/")
-        async def predict(input: input_class):
+        @app.post("/predict")
+        async def predict(input: predict_input_class):
             return self.model.predict(input)
+
+        # adding a route for feedback
+        feedback_input_class = self.feedback_input_class
+
+        @app.post("/feedback")
+        async def feedback(input: feedback_input_class):
+            return {"status": "OK"}
 
         return app
