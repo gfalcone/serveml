@@ -1,22 +1,37 @@
 # mlserve
 
-`mlserve` is a Machine Learning tool that helps you exposer your Machine Learning model easily into an API.
+`mlserve` is a Python library that helps you package your Machine Learning model easily into a REST API.
 
-Doing that is no easy task, and is not really the Data Scientist's role.
+The idea behind `mlserve` is to define a set of generic endpoints to enable predictions
 
-With `mlserve` you can abstract all of technical challenges around building an API and ship your model easily !
+## Documentation
 
-## Prerequisites 
+You can find the full documentation here : 
+
+## How to use ? 
+
+### Prerequisites 
 
 Have a MlFlow server running, in order to have one on your local setup : 
 
 ```bash
-mlflow server --backend-store-uri mysql://root:root@mysql/mlflow --default-artifact-root s3://drivy-data-dev/mlflow/app/runs -h 0.0.0.0
+mlflow server --backend-store-uri sqlite:///database.db --default-artifact-root file:///app/ --host 0.0.0.0 &
 ```
 
-## How to use ? 
+### Instructions
 
-First of all, you need to define your API into a Python file, say `api.py`
+First of all, you need to have a model already trained and registered in MlFlow
+
+Luckily for you, we already have a set of examples that you can already use.
+
+To train a scikit-learn model and register it in MlFlow : 
+
+```bash
+curl -O https://github.com/gfalcone/mlserve/blob/master/examples/training/sklearn.py
+python -m sklearn
+```
+
+Then you can define your api with this python file (name it `api.py`)
 
 ```python
 from mlserve.api import ApiBuilder
@@ -27,7 +42,7 @@ from pydantic import BaseModel
 # load model
 model = load_mlflow_model(
     # MlFlow model path
-    'models:/my_model/Production',
+    'models:/sklearn_model/1',
     # MlFlow Tracking URI (optional)
     'http://localhost:5000',
 )
@@ -52,7 +67,7 @@ class WineComposition(BaseModel):
 app = ApiBuilder(GenericPrediction(model), WineComposition).build_api()
 ```
 
-Then to run it : 
+You can then run it with : 
 
 ```bash
 uvicorn api:app --host 0.0.0.0

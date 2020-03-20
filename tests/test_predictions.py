@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 from mlserve.data_models import BaseModel, FeedbackModel
-from mlserve.io import dict_to_pandas
+from mlserve.io import dict_to_pandas, pandas_to_dict
 from mlserve.loader import load_mlflow_model
 from mlserve.predictions import GenericPrediction
 
@@ -27,10 +27,6 @@ class TestGenericPrediction(unittest.TestCase):
                 transformed_input
             ).equals(transformed_input)
         )
-
-    def test__generate_request_uuid(self):
-        result = self.prediction._generate_request_uuid({'item_id': 0})
-        self.assertIsNotNone(result['request_id'])
 
     def test__transform_input(self):
         item = {
@@ -56,7 +52,8 @@ class TestGenericPrediction(unittest.TestCase):
             'volatile_acidity': 0,
         }
         df = dict_to_pandas(item)
-        self.model.predict(df)
+        result = self.model.predict(df)
+        print(result)
 
     def test__transform_output(self):
         items_array = [1, 2, 3]

@@ -16,4 +16,3 @@ mlflow experiments create -n test_tensorflow
 python -m examples.training.tensorflow
 mlflow experiments create -n test_prophet
 python -m examples.training.prophet
-# python -m unittest tests.examples.serving.test_keras

@@ -1,5 +1,7 @@
 import configparser
 
+from uuid import uuid4
+
 from fastapi import FastAPI
 
 from mlserve.predictions import AbstractPrediction
@@ -53,15 +55,24 @@ class ApiBuilder(object):
         # adding a route for predict
         predict_input_class = self.predict_input_class
 
+        def _generate_request_uuid():
+            """
+            Helper function to generate a unique request_id to have a unique
+            identifier of the request made.
+            """
+            return uuid4()
+
         @app.post("/predict")
         async def predict(input: predict_input_class):
-            return self.model.predict(input)
+            request_uuid = _generate_request_uuid()
+            return self.model.predict(input, request_uuid)
 
         # adding a route for feedback
         feedback_input_class = self.feedback_input_class
 
         @app.post("/feedback")
         async def feedback(input: feedback_input_class):
-            return {"status": "OK"}
+            request_uuid = _generate_request_uuid()
+            return {"status": "OK", 'request_uuid': request_uuid}
 
         return app
