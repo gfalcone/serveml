@@ -6,7 +6,7 @@ from keras.preprocessing.text import Tokenizer
 from mlserve.api import ApiBuilder
 from mlserve.loader import load_mlflow_model
 from mlserve.predictions import GenericPrediction
-from pydantic import BaseModel
+from mlserve.inputs import BasicInput
 
 from mlserve.io import dict_to_pandas, pandas_to_dict
 # load model
@@ -19,7 +19,7 @@ model = load_mlflow_model(
 
 
 # Implement deserializer for input data
-class ReutersNewswireTopic(BaseModel):
+class ReutersNewswireTopic(BasicInput):
     sequence: List[int]
 
 

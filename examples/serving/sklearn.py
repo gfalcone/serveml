@@ -1,7 +1,8 @@
 from mlserve.api import ApiBuilder
 from mlserve.loader import load_mlflow_model
 from mlserve.predictions import GenericPrediction
-from pydantic import BaseModel
+
+from mlserve.inputs import BasicInput
 
 # load model
 model = load_mlflow_model(
@@ -13,7 +14,7 @@ model = load_mlflow_model(
 
 
 # Implement deserializer for input data
-class WineComposition(BaseModel):
+class WineComposition(BasicInput):
     alcohol: float
     chlorides: float
     citric_acid: float

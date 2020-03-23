@@ -2,10 +2,9 @@ from abc import ABC, abstractmethod
 
 import numpy as np
 import pandas as pd
-from pydantic import BaseModel
 
+from mlserve.inputs import BasicInput
 from mlserve.io import pydantic_model_to_pandas, pandas_to_dict
-
 
 class AbstractPrediction(ABC):
     """
@@ -15,7 +14,7 @@ class AbstractPrediction(ABC):
         self.model = model
 
     @abstractmethod
-    def _transform_input(self, input: BaseModel):
+    def _transform_input(self, input: BasicInput):
         """
         Function called right after API call. It is supposed to transform
         <pydantic.BaseModel> object into the input data format needed to apply
@@ -23,7 +22,7 @@ class AbstractPrediction(ABC):
         """
 
     @staticmethod
-    def _fetch_data(input: BaseModel):
+    def _fetch_data(input: BasicInput):
         """
         Helper function in case we need additional data. In most of the cases,
         can be ignored
@@ -78,7 +77,7 @@ class GenericPrediction(AbstractPrediction):
     """
     Implementation of <mlserve.ml.model.AbstractModel> for scikit-learn
     """
-    def _transform_input(self, input: BaseModel):
+    def _transform_input(self, input: BasicInput):
         """
         Transforms <pydantic.BaseModel> object to <pandas.DataFrame>
         """

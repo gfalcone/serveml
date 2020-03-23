@@ -1,7 +1,7 @@
 from mlserve.loader import load_mlflow_model
 from mlserve.predictions import GenericPrediction
 from mlserve.api import ApiBuilder
-from pydantic import BaseModel
+from mlserve.inputs import BasicInput
 
 # load model
 model = load_mlflow_model(
@@ -13,7 +13,7 @@ model = load_mlflow_model(
 
 
 # Implement deserializer for input data
-class PeriodPrediction(BaseModel):
+class PeriodPrediction(BasicInput):
     periods: int
 
 

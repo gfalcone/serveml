@@ -3,7 +3,7 @@ import mlflow
 from mlserve.loader import load_mlflow_model
 from mlserve.predictions import GenericPrediction
 from mlserve.api import ApiBuilder
-from pydantic import BaseModel
+from mlserve.inputs import BasicInput
 
 # getting run_id
 mlflow_client = mlflow.tracking.MlflowClient('http://localhost:5000')
@@ -13,7 +13,7 @@ model = load_mlflow_model("/app/4/{}/artifacts/model".format(run_id))
 
 
 # Implement deserializer for input data
-class PetalComposition(BaseModel):
+class PetalComposition(BasicInput):
     SepalWidth: float
     SepalLength: float
     PetalLength: float

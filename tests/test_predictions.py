@@ -3,7 +3,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from mlserve.inputs import BaseModel, FeedbackInput
+from mlserve.inputs import BasicInput, FeedbackInput
 from mlserve.io import dict_to_pandas, pandas_to_dict
 from mlserve.loader import load_mlflow_model
 from mlserve.predictions import GenericPrediction
@@ -17,7 +17,7 @@ class TestGenericPrediction(unittest.TestCase):
         self.prediction = GenericPrediction(self.model)
 
     def test__fetch_data(self):
-        self.assertIsNone(self.prediction._fetch_data(BaseModel()))
+        self.assertIsNone(self.prediction._fetch_data(BasicInput()))
 
     def test__combine_fetched_data_with_input(self):
         transformed_input = dict_to_pandas({'item_id': 0, 'name': 'coconut'})

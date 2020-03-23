@@ -1,8 +1,8 @@
 import pandas as pd
-from pydantic import BaseModel
+from mlserve.inputs import BasicInput
 
 
-def pydantic_model_to_pandas(pydantic_model_input: BaseModel):
+def pydantic_model_to_pandas(pydantic_model_input: BasicInput):
     """
     Function that transforms <pydantic.BaseModel> child objects to
     <pandas.DataFrame> objects
