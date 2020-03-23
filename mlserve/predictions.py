@@ -1,3 +1,5 @@
+import logging
+
 from abc import ABC, abstractmethod
 
 import numpy as np
@@ -58,18 +60,30 @@ class AbstractPrediction(ABC):
             - Transform output into more suitable format for an API
             - Add an uuid to the request to track request made
         """
-        print('Transforming input for request : {}'.format(uuid))
+        logging.debug(
+            'Got input: {} for request_id: {}'.format(input.dict(), uuid)
+        )
+        logging.info('Transforming input for request: {}'.format(uuid))
         transformed_input = self._transform_input(input)
-        print('Fetching data for request : {}'.format(uuid))
+        logging.debug(
+            'Input transformed to this: {}'.format(transformed_input)
+        )
+        logging.info('Fetching data for request: {}'.format(uuid))
         fetched_data = self._fetch_data(input)
-        print('Combining fetched data and input for request {}'.format(uuid))
+        logging.debug('Fetched data: {}'.format(fetched_data))
+        logging.info(
+            'Combining fetched data and input for request {}'.format(uuid)
+        )
         combined_data = self._combine_fetched_data_with_input(
             fetched_data, transformed_input
         )
-        print('Applying input for request {}'.format(uuid))
+        logging.debug('Combined data: {}'.format(combined_data))
+        logging.info('Applying input for request {}'.format(uuid))
         output = self._apply_model(combined_data)
-        print('Transforming output for request {}'.format(uuid))
+        logging.debug('Prediction output: {}'.format(output))
+        logging.info('Transforming output for request {}'.format(uuid))
         transformed_output = self._transform_output(output)
+        logging.debug('Transformed output: {}'.format(transformed_output))
         transformed_output['request_id'] = uuid
         return transformed_output
 

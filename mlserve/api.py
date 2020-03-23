@@ -1,4 +1,5 @@
 import configparser
+import logging
 
 from uuid import uuid4, UUID
 
@@ -22,7 +23,7 @@ class ApiBuilder(object):
         """
         :param model: <mlserve.ml.model.AbstractModel> object that inplements
         helper functions to have a proper API working.
-        :param input_class: <pydantic.BaseModel> object that implements the
+        :param predict_input_class: <pydantic.BaseModel> object that implements the
         `/predict` input validator
         """
         self.model = model
@@ -55,8 +56,11 @@ class ApiBuilder(object):
         @app.post("/predict")
         async def predict(input: predict_input_class) -> dict:
             request_uuid = self._generate_request_uuid()
-            return self.model.predict(input, request_uuid)
-
+            logging.info('Begin prediction for: {}'.format(request_uuid))
+            prediction_result = self.model.predict(input, request_uuid)
+            logging.info('Prediction done for: {}'.format(request_uuid))
+            return prediction_result
+        
     def _register_feedback_endpoint(self, app: FastAPI):
         """
         This function will register the `/feedback` endpoint on our API
