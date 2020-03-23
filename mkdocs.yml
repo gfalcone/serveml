@@ -1,0 +1,27 @@
+site_name: mlserve
+site_description: mlserve framework, push your machine learning models to production
+
+theme:
+  name: 'material'
+
+repo_name: gfalcone/mlserve
+repo_url: https://github.com/gfalcone/mlserve
+
+nav:
+    - mlserve: 'index.md'
+    - Features: 'features.md'
+    - Examples:
+        - Examples - Introduction: 'examples/index.md'
+        - Keras: 'examples/keras.md'
+        - Prophet: 'examples/prophet.md'
+        - Pytorch: 'examples/prophet.md'
+        - Sklearn: 'examples/sklearn.md'
+        - Tensorflow: 'examples/tensorflow.md'
+        - Xgboost: 'examples/xgboost.md'
+    - Going further: 'going_further.md'
+
+
+markdown_extensions:
+  - markdown_include.include:
+      base_path: .
+  - codehilite

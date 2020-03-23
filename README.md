@@ -2,7 +2,14 @@
 
 `mlserve` is a Python library that helps you package your Machine Learning model easily into a REST API.
 
-The idea behind `mlserve` is to define a set of generic endpoints to enable predictions
+The idea behind `mlserve` is to define a set of generic endpoints to make predictions easily !
+
+## Requirements
+
+- Python 3.6+
+- fastapi (for the API part)
+- mlflow (for model loading)
+- uvicorn (to run api)
 
 ## Documentation
 
@@ -35,9 +42,9 @@ Then you can define your api with this python file (name it `api.py`)
 
 ```python
 from mlserve.api import ApiBuilder
+from mlserve.inputs import BasicInput
 from mlserve.loader import load_mlflow_model
 from mlserve.predictions import GenericPrediction
-from pydantic import BaseModel
 
 # load model
 model = load_mlflow_model(
@@ -49,7 +56,7 @@ model = load_mlflow_model(
 
 
 # Implement deserializer for input data
-class WineComposition(BaseModel):
+class WineComposition(BasicInput):
     alcohol: float
     chlorides: float
     citric_acid: float
