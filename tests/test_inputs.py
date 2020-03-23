@@ -5,7 +5,7 @@ from pydantic.error_wrappers import ValidationError
 from mlserve.inputs import FeedbackInput
 
 
-class TestDataModels(unittest.TestCase):
+class TestInputs(unittest.TestCase):
     def test_parsing_good_input(self):
         feedback_input = {
             'request_id': 'coconut',

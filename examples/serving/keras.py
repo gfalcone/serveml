@@ -8,7 +8,6 @@ from mlserve.loader import load_mlflow_model
 from mlserve.predictions import GenericPrediction
 from mlserve.inputs import BasicInput
 
-from mlserve.io import dict_to_pandas, pandas_to_dict
 # load model
 model = load_mlflow_model(
     # MlFlow model path

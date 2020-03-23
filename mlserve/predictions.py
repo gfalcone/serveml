@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 from mlserve.inputs import BasicInput
-from mlserve.io import pydantic_model_to_pandas, pandas_to_dict
+from mlserve.utils import pydantic_model_to_pandas, pandas_to_dict
 
 class AbstractPrediction(ABC):
     """

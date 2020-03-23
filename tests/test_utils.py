@@ -3,10 +3,10 @@ import unittest
 import pandas as pd
 
 from mlserve.inputs import FeedbackInput
-from mlserve.io import dict_to_pandas, pandas_to_dict, pydantic_model_to_pandas
+from mlserve.utils import dict_to_pandas, pandas_to_dict, pydantic_model_to_pandas
 
 
-class TestIO(unittest.TestCase):
+class TestUtils(unittest.TestCase):
     def test_parsing_dict_to_pandas(self):
         item = {'item_id': 0, 'item_name': 'coconut'}
         df = dict_to_pandas(item)
