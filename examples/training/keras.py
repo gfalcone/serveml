@@ -1,6 +1,6 @@
-'''Trains and evaluate a simple MLP
-on the Reuters newswire topic classification task.
-'''
+"""
+Example taken from https://github.com/mlflow/mlflow/blob/master/examples/keras/train.py
+"""
 from __future__ import print_function
 
 import numpy as np

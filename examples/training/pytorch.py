@@ -1,3 +1,6 @@
+"""
+Example taken from https://github.com/mlflow/mlflow/blob/master/mlflow/pytorch/__init__.py
+"""
 import torch
 import mlflow
 import mlflow.pytorch

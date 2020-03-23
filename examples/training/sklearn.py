@@ -1,3 +1,6 @@
+"""
+Example taken from https://github.com/mlflow/mlflow/blob/master/examples/sklearn_elasticnet_wine/train.py
+"""
 import warnings
 import sys
 

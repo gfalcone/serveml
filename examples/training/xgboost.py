@@ -1,3 +1,7 @@
+"""
+Example taken from https://github.com/mlflow/mlflow/blob/master/examples/xgboost/train.py
+"""
+
 import argparse
 
 from sklearn import datasets
