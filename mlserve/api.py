@@ -1,11 +1,11 @@
 import configparser
 
-from uuid import uuid4
+from uuid import uuid4, UUID
 
 from fastapi import FastAPI
 
 from mlserve.predictions import AbstractPrediction
-from mlserve.inputs import FeedbackInput
+from mlserve.inputs import FeedbackInput, BasicInput
 
 
 class ApiBuilder(object):
@@ -17,7 +17,7 @@ class ApiBuilder(object):
             model: AbstractPrediction,
             predict_input_class,
             feedback_input_class=FeedbackInput,
-            configuration_path=None,
+            configuration_path: str = None,
     ) -> None:
         """
         :param model: <mlserve.ml.model.AbstractModel> object that inplements
@@ -31,7 +31,7 @@ class ApiBuilder(object):
         self.configuration = configparser.ConfigParser()
         self.load_configuration(configuration_path)
 
-    def load_configuration(self, configuration_path):
+    def load_configuration(self, configuration_path: str) -> None:
         """
         Loads configuration in `configuration_path`
         """
@@ -58,7 +58,7 @@ class ApiBuilder(object):
         # adding a route for predict
         predict_input_class = self.predict_input_class
 
-        def _generate_request_uuid():
+        def _generate_request_uuid() -> UUID:
             """
             Helper function to generate a unique request_id to have a unique
             identifier of the request made.
@@ -66,7 +66,7 @@ class ApiBuilder(object):
             return uuid4()
 
         @app.post("/predict")
-        async def predict(input: predict_input_class):
+        async def predict(input: predict_input_class) -> dict:
             request_uuid = _generate_request_uuid()
             return self.model.predict(input, request_uuid)
 
@@ -74,7 +74,7 @@ class ApiBuilder(object):
         feedback_input_class = self.feedback_input_class
 
         @app.post("/feedback")
-        async def feedback(input: feedback_input_class):
+        async def feedback(input: feedback_input_class) -> dict:
             request_uuid = _generate_request_uuid()
             return {"status": "OK", 'request_uuid': request_uuid}
 

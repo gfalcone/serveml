@@ -6,6 +6,7 @@ import pandas as pd
 from mlserve.inputs import BasicInput
 from mlserve.utils import pydantic_model_to_pandas, pandas_to_dict
 
+
 class AbstractPrediction(ABC):
     """
     Abstract class to define methods called during predict
@@ -14,7 +15,7 @@ class AbstractPrediction(ABC):
         self.model = model
 
     @abstractmethod
-    def _transform_input(self, input: BasicInput):
+    def _transform_input(self, input):
         """
         Function called right after API call. It is supposed to transform
         <pydantic.BaseModel> object into the input data format needed to apply
@@ -77,7 +78,7 @@ class GenericPrediction(AbstractPrediction):
     """
     Implementation of <mlserve.ml.model.AbstractModel> for scikit-learn
     """
-    def _transform_input(self, input: BasicInput):
+    def _transform_input(self, input) -> pd.DataFrame:
         """
         Transforms <pydantic.BaseModel> object to <pandas.DataFrame>
         """
@@ -93,7 +94,7 @@ class GenericPrediction(AbstractPrediction):
         """
         return self.model.predict(transformed_input)
 
-    def _transform_output(self, output):
+    def _transform_output(self, output) -> dict:
         """
         Transforms output given by <mlserve.ml.sklearn._apply_model> to
         prepare sending result with API.
