@@ -2,9 +2,10 @@ import unittest
 
 import mlflow
 
+from sklearn.linear_model import ElasticNet
+
 from mlflow.exceptions import RestException
 from mlflow.tensorflow import _TF2Wrapper
-from sklearn.linear_model import ElasticNet
 
 from mlserve.loader import load_mlflow_model
 

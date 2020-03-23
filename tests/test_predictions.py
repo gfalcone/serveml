@@ -4,9 +4,9 @@ import numpy as np
 import pandas as pd
 
 from mlserve.inputs import BasicInput, FeedbackInput
-from mlserve.utils import dict_to_pandas, pandas_to_dict
 from mlserve.loader import load_mlflow_model
 from mlserve.predictions import GenericPrediction
+from mlserve.utils import dict_to_pandas
 
 
 class TestGenericPrediction(unittest.TestCase):

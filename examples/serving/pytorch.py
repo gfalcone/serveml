@@ -1,7 +1,7 @@
 from mlserve.api import ApiBuilder
+from mlserve.inputs import BasicInput
 from mlserve.loader import load_mlflow_model
 from mlserve.predictions import GenericPrediction
-from mlserve.inputs import BasicInput
 
 # load model
 model = load_mlflow_model(

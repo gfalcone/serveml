@@ -1,5 +1,4 @@
 import pandas as pd
-from mlserve.inputs import BasicInput
 
 
 def pydantic_model_to_pandas(pydantic_model_input) -> pd.DataFrame:

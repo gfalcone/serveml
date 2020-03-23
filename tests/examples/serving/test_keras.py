@@ -2,9 +2,9 @@ import json
 
 from multiprocessing import Process
 
-import asynctest
-import asyncio
 import aiohttp
+import asyncio
+import asynctest
 import uvicorn
 
 from examples.serving.keras import app

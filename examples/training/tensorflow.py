@@ -2,7 +2,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import os
 import tempfile
 
 import mlflow
@@ -10,8 +9,6 @@ import argparse
 import pandas as pd
 import tensorflow as tf
 import mlflow.tensorflow
-
-from mlflow import pyfunc
 
 
 TRAIN_URL = "http://download.tensorflow.org/data/iris_training.csv"
