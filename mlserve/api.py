@@ -5,7 +5,7 @@ from uuid import uuid4
 from fastapi import FastAPI
 
 from mlserve.predictions import AbstractPrediction
-from mlserve.data_models import FeedbackModel
+from mlserve.inputs import FeedbackInput
 
 
 class ApiBuilder(object):
@@ -16,9 +16,9 @@ class ApiBuilder(object):
             self,
             model: AbstractPrediction,
             predict_input_class,
-            feedback_input_class=FeedbackModel,
+            feedback_input_class=FeedbackInput,
             configuration_path=None,
-    ):
+    ) -> None:
         """
         :param model: <mlserve.ml.model.AbstractModel> object that inplements
         helper functions to have a proper API working.
@@ -32,6 +32,9 @@ class ApiBuilder(object):
         self.load_configuration(configuration_path)
 
     def load_configuration(self, configuration_path):
+        """
+        Loads configuration in `configuration_path`
+        """
         if configuration_path is not None:
             self.configuration.read(configuration_path)
 

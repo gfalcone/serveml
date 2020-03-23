@@ -2,7 +2,7 @@ import unittest
 
 from pydantic.error_wrappers import ValidationError
 
-from mlserve.data_models import FeedbackModel
+from mlserve.inputs import FeedbackInput
 
 
 class TestDataModels(unittest.TestCase):
@@ -11,7 +11,7 @@ class TestDataModels(unittest.TestCase):
             'request_id': 'coconut',
             'status': True
         }
-        feedback_object = FeedbackModel(**feedback_input)
+        feedback_object = FeedbackInput(**feedback_input)
         self.assertEqual(feedback_object.request_id, 'coconut')
         self.assertEqual(feedback_object.status, True)
 
@@ -21,7 +21,7 @@ class TestDataModels(unittest.TestCase):
             'status': 'coconut'
         }
         with self.assertRaises(ValidationError):
-            FeedbackModel(**feedback_input)
+            FeedbackInput(**feedback_input)
 
     def test_parsing_input_with_wrong_additional_inputs(self):
         feedback_input = {
@@ -29,6 +29,6 @@ class TestDataModels(unittest.TestCase):
             'status': True,
             'awesome': True
         }
-        feedback = FeedbackModel(**feedback_input)
+        feedback = FeedbackInput(**feedback_input)
         expected_keys = {'request_id', 'status', 'expected_result'}
         self.assertEqual(expected_keys, feedback.dict().keys())

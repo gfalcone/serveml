@@ -3,7 +3,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from mlserve.data_models import BaseModel, FeedbackModel
+from mlserve.inputs import BaseModel, FeedbackInput
 from mlserve.io import dict_to_pandas, pandas_to_dict
 from mlserve.loader import load_mlflow_model
 from mlserve.predictions import GenericPrediction
@@ -34,7 +34,7 @@ class TestGenericPrediction(unittest.TestCase):
             'status': True,
             'expected_result': 'coco'
         }
-        result = self.prediction._transform_input(FeedbackModel(**item))
+        result = self.prediction._transform_input(FeedbackInput(**item))
         self.assertTrue(result.equals(dict_to_pandas(item)))
 
     def test__apply_model(self):

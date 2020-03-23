@@ -2,7 +2,7 @@ import unittest
 
 import pandas as pd
 
-from mlserve.data_models import FeedbackModel
+from mlserve.inputs import FeedbackInput
 from mlserve.io import dict_to_pandas, pandas_to_dict, pydantic_model_to_pandas
 
 
@@ -19,7 +19,7 @@ class TestIO(unittest.TestCase):
         self.assertEqual(pandas_to_dict(df), [item])
 
     def test_pydantic_model_to_pandas(self):
-        feedback = FeedbackModel(status=True, request_id='coconut')
+        feedback = FeedbackInput(status=True, request_id='coconut')
         result = pydantic_model_to_pandas(feedback)
         item = {
             'request_id': 'coconut', 'status': True, 'expected_result': None

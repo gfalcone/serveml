@@ -19,7 +19,7 @@ class TestMLflowModelLoader(unittest.TestCase):
 
     def test_load_model_from_run_id(self):
         # getting run_id
-        mlflow_client = mlflow.tracking.MflowClient('http://localhost:5000')
+        mlflow_client = mlflow.tracking.MlflowClient('http://localhost:5000')
         run_id = mlflow_client.list_run_infos(experiment_id=4)[0].run_id
         model = load_mlflow_model("/app/4/{}/artifacts/model".format(run_id))
         self.assertIsInstance(model, _TF2Wrapper)
