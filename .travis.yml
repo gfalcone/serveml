@@ -8,3 +8,4 @@ before_install:
 
 script:
   - /app/run_tests.sh
+
