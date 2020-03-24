@@ -1,3 +1,4 @@
+import os
 import unittest
 
 import mlflow
@@ -21,8 +22,9 @@ class TestMLflowModelLoader(unittest.TestCase):
         # getting run_id
         mlflow_client = mlflow.tracking.MlflowClient("http://localhost:5000")
         run_id = mlflow_client.list_run_infos(experiment_id=4)[0].run_id
+        current_directory = os.getcwd()
         model = load_mlflow_model(
-            "runs:/{}/artifacts/model".format(run_id), "http://localhost:5000"
+            "{}/4/{}/artifacts/model".format(current_directory, run_id)
         )
         self.assertIsInstance(model, _TF2Wrapper)
 

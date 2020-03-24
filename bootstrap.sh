@@ -9,7 +9,7 @@ sleep 2
 
 case "$1" in
   test)
-    source /app/run_tests.sh
+    pytest
     ;;
   *)
     exec "$@"

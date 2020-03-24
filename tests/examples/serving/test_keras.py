@@ -5,6 +5,7 @@ from multiprocessing import Process
 import aiohttp
 import asyncio
 import asynctest
+import pytest
 import uvicorn
 
 from examples.serving.keras import app
@@ -13,6 +14,7 @@ from examples.serving.keras import app
 class TestKerasAPI(asynctest.TestCase):
     """Tests the API class"""
 
+    @pytest.mark.asyncio
     async def setUp(self):
         """ Bring server up. """
         self.process = Process(
@@ -24,10 +26,12 @@ class TestKerasAPI(asynctest.TestCase):
         self.process.start()
         await asyncio.sleep(5)  # time for the server to start
 
+    @pytest.mark.asyncio
     async def tearDown(self):
         """ Shutdown the app. """
         self.process.terminate()
 
+    @pytest.mark.asyncio
     @asynctest.skip("Does not work at the moment")
     async def test_predict(self):
         """ Fetch an endpoint from the app. """
