@@ -5,8 +5,4 @@ services:
 
 before_install:
   - docker build -t mlserve .
-
-script:
-  - mlflow server --backend-store-uri sqlite:///database.db --default-artifact-root file:///app/ --host 0.0.0.0 &
-  - sleep 2
-  - bash run_tests.sh
+  - docker run -ti mlserve test
