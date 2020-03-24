@@ -1,8 +1,14 @@
 language: python
 
-services:
-  - docker
+python:
+  - "3.6"      # current default Python on Travis CI
+  - "3.7"
+  - "3.8"
 
-before_install:
-  - docker build -t mlserve .
-  - docker run -ti mlserve test
+install:
+  - pip install -r requirements.txt
+  - pip install -r requirements-test.txt
+  - bash create_dev_environment.sh
+
+script:
+  - bash run_tests.sh
