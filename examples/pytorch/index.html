@@ -457,6 +457,7 @@
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">mlflow</span>
 <span class="kn">import</span> <span class="nn">mlflow.pytorch</span>
+
 <span class="c1"># X data</span>
 <span class="n">x_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">]])</span>
 <span class="c1"># Y data with its expected value: labels</span>
@@ -500,9 +501,7 @@
 <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">(</span><span class="n">experiment_id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">run</span><span class="p">:</span>
     <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;epochs&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
     <span class="n">mlflow</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
-        <span class="n">model</span><span class="p">,</span>
-        <span class="s2">&quot;model&quot;</span><span class="p">,</span>
-        <span class="n">registered_model_name</span><span class="o">=</span><span class="s1">&#39;pytorch_model&#39;</span>
+        <span class="n">model</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">registered_model_name</span><span class="o">=</span><span class="s2">&quot;pytorch_model&quot;</span>
     <span class="p">)</span>
 </code></pre></div>
 
@@ -521,9 +520,9 @@
 <span class="c1"># load model</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">load_mlflow_model</span><span class="p">(</span>
     <span class="c1"># MlFlow model path</span>
-    <span class="s1">&#39;models:/pytorch_model/1&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;models:/pytorch_model/1&quot;</span><span class="p">,</span>
     <span class="c1"># MlFlow Tracking URI</span>
-    <span class="s1">&#39;http://localhost:5000&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;http://localhost:5000&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
 

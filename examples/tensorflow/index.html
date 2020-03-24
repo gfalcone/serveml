@@ -470,15 +470,20 @@
 <span class="n">TRAIN_URL</span> <span class="o">=</span> <span class="s2">&quot;http://download.tensorflow.org/data/iris_training.csv&quot;</span>
 <span class="n">TEST_URL</span> <span class="o">=</span> <span class="s2">&quot;http://download.tensorflow.org/data/iris_test.csv&quot;</span>
 
-<span class="n">CSV_COLUMN_NAMES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SepalLength&#39;</span><span class="p">,</span> <span class="s1">&#39;SepalWidth&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;PetalLength&#39;</span><span class="p">,</span> <span class="s1">&#39;PetalWidth&#39;</span><span class="p">,</span> <span class="s1">&#39;Species&#39;</span><span class="p">]</span>
-<span class="n">SPECIES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Setosa&#39;</span><span class="p">,</span> <span class="s1">&#39;Versicolor&#39;</span><span class="p">,</span> <span class="s1">&#39;Virginica&#39;</span><span class="p">]</span>
+<span class="n">CSV_COLUMN_NAMES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;SepalLength&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SepalWidth&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PetalLength&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PetalWidth&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Species&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">SPECIES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Setosa&quot;</span><span class="p">,</span> <span class="s2">&quot;Versicolor&quot;</span><span class="p">,</span> <span class="s2">&quot;Virginica&quot;</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">y_name</span><span class="o">=</span><span class="s1">&#39;Species&#39;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">y_name</span><span class="o">=</span><span class="s2">&quot;Species&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the iris dataset as (train_x, train_y), (test_x, test_y).&quot;&quot;&quot;</span>
-    <span class="n">train_path</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="n">TRAIN_URL</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">TRAIN_URL</span><span class="p">)</span>
-    <span class="n">test_path</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="n">TEST_URL</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">TEST_URL</span><span class="p">)</span>
+    <span class="n">train_path</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="n">TRAIN_URL</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">TRAIN_URL</span><span class="p">)</span>
+    <span class="n">test_path</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="n">TEST_URL</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">TEST_URL</span><span class="p">)</span>
 
     <span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">train_path</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">CSV_COLUMN_NAMES</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span> <span class="o">=</span> <span class="n">train</span><span class="p">,</span> <span class="n">train</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">y_name</span><span class="p">)</span>
@@ -503,7 +508,7 @@
 
 <span class="k">def</span> <span class="nf">eval_input_fn</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;An input function for evaluation or prediction&quot;&quot;&quot;</span>
-    <span class="n">features</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># No labels, use only features.</span>
         <span class="n">inputs</span> <span class="o">=</span> <span class="n">features</span>
@@ -520,13 +525,15 @@
     <span class="c1"># Return the dataset.</span>
     <span class="k">return</span> <span class="n">dataset</span>
 
+
 <span class="c1"># Enable auto-logging to MLflow to capture TensorBoard metrics.</span>
 <span class="n">mlflow</span><span class="o">.</span><span class="n">tensorflow</span><span class="o">.</span><span class="n">autolog</span><span class="p">()</span>
 
 <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--batch_size&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;batch size&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--train_steps&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-                    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;number of training steps&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--batch_size&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;batch size&quot;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s2">&quot;--train_steps&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;number of training steps&quot;</span>
+<span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
@@ -537,7 +544,9 @@
         <span class="c1"># Feature columns describe how to use the input.</span>
         <span class="n">my_feature_columns</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">train_x</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="n">my_feature_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">))</span>
+            <span class="n">my_feature_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+            <span class="p">)</span>
 
         <span class="c1"># Two hidden layers of 10 nodes each.</span>
         <span class="n">hidden_units</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
@@ -547,48 +556,51 @@
             <span class="n">feature_columns</span><span class="o">=</span><span class="n">my_feature_columns</span><span class="p">,</span>
             <span class="n">hidden_units</span><span class="o">=</span><span class="n">hidden_units</span><span class="p">,</span>
             <span class="c1"># The model must choose between 3 classes.</span>
-            <span class="n">n_classes</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+            <span class="n">n_classes</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="p">)</span>
 
         <span class="c1"># Train the Model.</span>
         <span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-            <span class="n">input_fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span><span class="n">train_input_fn</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span>
-                                                     <span class="n">args</span><span class="o">.</span><span class="n">batch_size</span><span class="p">),</span>
-            <span class="n">steps</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">train_steps</span><span class="p">)</span>
+            <span class="n">input_fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">train_input_fn</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">batch_size</span><span class="p">),</span>
+            <span class="n">steps</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">train_steps</span><span class="p">,</span>
+        <span class="p">)</span>
 
         <span class="c1"># Evaluate the model.</span>
         <span class="n">eval_result</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
-            <span class="n">input_fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span><span class="n">eval_input_fn</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span><span class="p">,</span>
-                                                    <span class="n">args</span><span class="o">.</span><span class="n">batch_size</span><span class="p">))</span>
+            <span class="n">input_fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">eval_input_fn</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
+        <span class="p">)</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Test set accuracy: </span><span class="si">{accuracy:0.3f}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">eval_result</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Test set accuracy: </span><span class="si">{accuracy:0.3f}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">eval_result</span><span class="p">))</span>
 
         <span class="c1"># Creating output tf.Variables to specify the output of the saved model.</span>
         <span class="n">feat_specifications</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;SepalLength&#39;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SepalLength&quot;</span><span class="p">),</span>
-            <span class="s1">&#39;SepalWidth&#39;</span><span class="p">:</span>  <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SepalWidth&quot;</span><span class="p">),</span>
-            <span class="s1">&#39;PetalLength&#39;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;PetalLength&quot;</span><span class="p">),</span>
-            <span class="s1">&#39;PetalWidth&#39;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;PetalWidth&quot;</span><span class="p">)</span>
+            <span class="s2">&quot;SepalLength&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
+                <span class="p">[],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SepalLength&quot;</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;SepalWidth&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SepalWidth&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;PetalLength&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
+                <span class="p">[],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;PetalLength&quot;</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;PetalWidth&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;PetalWidth&quot;</span><span class="p">),</span>
         <span class="p">}</span>
 
-        <span class="n">receiver_fn</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">export</span><span class="o">.</span><span class="n">build_raw_serving_input_receiver_fn</span><span class="p">(</span><span class="n">feat_specifications</span><span class="p">)</span>
+        <span class="n">receiver_fn</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">export</span><span class="o">.</span><span class="n">build_raw_serving_input_receiver_fn</span><span class="p">(</span>
+            <span class="n">feat_specifications</span>
+        <span class="p">)</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
 
-        <span class="n">classifier</span><span class="o">.</span><span class="n">export_saved_model</span><span class="p">(</span>
-            <span class="n">temp</span><span class="p">,</span>
-            <span class="n">receiver_fn</span><span class="p">,</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="n">classifier</span><span class="o">.</span><span class="n">export_saved_model</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">receiver_fn</span><span class="p">,)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
 
         <span class="c1"># custom code for registering models</span>
-        <span class="n">mlflow_client</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">tracking</span><span class="o">.</span><span class="n">MlflowClient</span><span class="p">(</span><span class="s1">&#39;http://localhost:5000&#39;</span><span class="p">)</span>
+        <span class="n">mlflow_client</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">tracking</span><span class="o">.</span><span class="n">MlflowClient</span><span class="p">(</span><span class="s2">&quot;http://localhost:5000&quot;</span><span class="p">)</span>
         <span class="n">run_id</span> <span class="o">=</span> <span class="n">mlflow_client</span><span class="o">.</span><span class="n">list_run_infos</span><span class="p">(</span><span class="n">experiment_id</span><span class="o">=</span><span class="mi">4</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">run_id</span>
 
         <span class="n">mlflow</span><span class="o">.</span><span class="n">register_model</span><span class="p">(</span>
-            <span class="s2">&quot;runs:/</span><span class="si">{}</span><span class="s2">/artifacts/model&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">run_id</span><span class="p">),</span>
-            <span class="s2">&quot;tensorflow_model&quot;</span>
+            <span class="s2">&quot;runs:/</span><span class="si">{}</span><span class="s2">/artifacts/model&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">run_id</span><span class="p">),</span> <span class="s2">&quot;tensorflow_model&quot;</span>
         <span class="p">)</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
     <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 </code></pre></div>
@@ -608,7 +620,7 @@
 <span class="kn">from</span> <span class="nn">mlserve.predictions</span> <span class="kn">import</span> <span class="n">GenericPrediction</span>
 
 <span class="c1"># getting run_id</span>
-<span class="n">mlflow_client</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">tracking</span><span class="o">.</span><span class="n">MlflowClient</span><span class="p">(</span><span class="s1">&#39;http://localhost:5000&#39;</span><span class="p">)</span>
+<span class="n">mlflow_client</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">tracking</span><span class="o">.</span><span class="n">MlflowClient</span><span class="p">(</span><span class="s2">&quot;http://localhost:5000&quot;</span><span class="p">)</span>
 <span class="n">run_id</span> <span class="o">=</span> <span class="n">mlflow_client</span><span class="o">.</span><span class="n">list_run_infos</span><span class="p">(</span><span class="n">experiment_id</span><span class="o">=</span><span class="mi">4</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">run_id</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">load_mlflow_model</span><span class="p">(</span><span class="s2">&quot;/app/4/</span><span class="si">{}</span><span class="s2">/artifacts/model&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">run_id</span><span class="p">))</span>

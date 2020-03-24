@@ -471,32 +471,35 @@
 <span class="kn">from</span> <span class="nn">fbprophet.diagnostics</span> <span class="kn">import</span> <span class="n">performance_metrics</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
+
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARN</span><span class="p">)</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">FbProphetWrapper</span><span class="p">(</span><span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">PythonModel</span><span class="p">):</span>
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">FbProphetWrapper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">load_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">fbprophet</span> <span class="kn">import</span> <span class="n">Prophet</span>
+
         <span class="k">return</span>
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">model_input</span><span class="p">):</span>
-        <span class="n">future</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_future_dataframe</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="n">model_input</span><span class="p">[</span><span class="s1">&#39;periods&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">future</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_future_dataframe</span><span class="p">(</span>
+            <span class="n">periods</span><span class="o">=</span><span class="n">model_input</span><span class="p">[</span><span class="s2">&quot;periods&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
 
 
 <span class="n">conda_env</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;channels&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;defaults&#39;</span><span class="p">,</span> <span class="s1">&#39;conda-forge&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;dependencies&#39;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s1">&#39;fbprophet=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fbprophet</span><span class="o">.</span><span class="n">__version__</span><span class="p">),</span>
-      <span class="s1">&#39;cloudpickle=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cloudpickle</span><span class="o">.</span><span class="n">__version__</span><span class="p">),</span>
+    <span class="s2">&quot;channels&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;defaults&quot;</span><span class="p">,</span> <span class="s2">&quot;conda-forge&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;fbprophet=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fbprophet</span><span class="o">.</span><span class="n">__version__</span><span class="p">),</span>
+        <span class="s2">&quot;cloudpickle=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cloudpickle</span><span class="o">.</span><span class="n">__version__</span><span class="p">),</span>
     <span class="p">],</span>
-    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;fbp_env&#39;</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;fbp_env&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
 
@@ -504,8 +507,11 @@
     <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
 
-    <span class="n">csv_url</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> \
-        <span class="s1">&#39;https://raw.githubusercontent.com/facebook/prophet/e21a05f4f9290649255a2a306855e8b4620816d7/examples/example_wp_log_peyton_manning.csv&#39;</span>
+    <span class="n">csv_url</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span>
+        <span class="k">else</span> <span class="s2">&quot;https://raw.githubusercontent.com/facebook/prophet/e21a05f4f9290649255a2a306855e8b4620816d7/examples/example_wp_log_peyton_manning.csv&quot;</span>
+    <span class="p">)</span>
     <span class="n">rolling_window</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="mf">0.1</span>
 
     <span class="c1"># Read the csv file from the URL</span>
@@ -513,7 +519,9 @@
         <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_url</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span>
-            <span class="s2">&quot;Unable to download training &amp; test CSV, check your internet connection. Error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+            <span class="s2">&quot;Unable to download training &amp; test CSV, check your internet connection. Error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">e</span><span class="p">,</span>
+        <span class="p">)</span>
 
     <span class="c1"># Useful for multiple runs (only doing one run in this sample notebook)</span>
     <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">(</span><span class="n">experiment_id</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
@@ -521,7 +529,9 @@
         <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 
         <span class="c1"># Evaluate Metrics</span>
-        <span class="n">df_cv</span> <span class="o">=</span> <span class="n">cross_validation</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="s1">&#39;730 days&#39;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="s1">&#39;180 days&#39;</span><span class="p">,</span> <span class="n">horizon</span><span class="o">=</span><span class="s1">&#39;365 days&#39;</span><span class="p">)</span>
+        <span class="n">df_cv</span> <span class="o">=</span> <span class="n">cross_validation</span><span class="p">(</span>
+            <span class="n">m</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="s2">&quot;730 days&quot;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="s2">&quot;180 days&quot;</span><span class="p">,</span> <span class="n">horizon</span><span class="o">=</span><span class="s2">&quot;365 days&quot;</span>
+        <span class="p">)</span>
         <span class="n">df_p</span> <span class="o">=</span> <span class="n">performance_metrics</span><span class="p">(</span><span class="n">df_cv</span><span class="p">,</span> <span class="n">rolling_window</span><span class="o">=</span><span class="n">rolling_window</span><span class="p">)</span>
 
         <span class="c1"># Print out metrics</span>
@@ -531,10 +541,19 @@
 
         <span class="c1"># Log parameter, metrics, and model to MLflow</span>
         <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;rolling_window&quot;</span><span class="p">,</span> <span class="n">rolling_window</span><span class="p">)</span>
-        <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span> <span class="n">df_p</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;rmse&#39;</span><span class="p">])</span>
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span> <span class="n">df_p</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;rmse&quot;</span><span class="p">])</span>
 
-        <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">conda_env</span><span class="o">=</span><span class="n">conda_env</span><span class="p">,</span> <span class="n">python_model</span><span class="o">=</span><span class="n">FbProphetWrapper</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">registered_model_name</span><span class="o">=</span><span class="s1">&#39;prophet_model&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Logged model with URI: runs:/</span><span class="si">{run_id}</span><span class="s2">/model&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">run_id</span><span class="o">=</span><span class="n">mlflow</span><span class="o">.</span><span class="n">active_run</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">run_id</span><span class="p">))</span>
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
+            <span class="s2">&quot;model&quot;</span><span class="p">,</span>
+            <span class="n">conda_env</span><span class="o">=</span><span class="n">conda_env</span><span class="p">,</span>
+            <span class="n">python_model</span><span class="o">=</span><span class="n">FbProphetWrapper</span><span class="p">(</span><span class="n">m</span><span class="p">),</span>
+            <span class="n">registered_model_name</span><span class="o">=</span><span class="s2">&quot;prophet_model&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Logged model with URI: runs:/</span><span class="si">{run_id}</span><span class="s2">/model&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">run_id</span><span class="o">=</span><span class="n">mlflow</span><span class="o">.</span><span class="n">active_run</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">run_id</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
 </code></pre></div>
 
 
@@ -552,9 +571,9 @@
 <span class="c1"># load model</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">load_mlflow_model</span><span class="p">(</span>
     <span class="c1"># MlFlow model path</span>
-    <span class="s1">&#39;models:/prophet_model/1&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;models:/prophet_model/1&quot;</span><span class="p">,</span>
     <span class="c1"># MlFlow Tracking URI</span>
-    <span class="s1">&#39;http://localhost:5000&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;http://localhost:5000&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
 
