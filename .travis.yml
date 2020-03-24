@@ -6,7 +6,9 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install -r requirements-test.txt
+  - pip install pytest
+  - pip install codecov
   - bash create_dev_environment.sh
 
 script:
-  - python -m unittest
+  - pytest
