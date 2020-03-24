@@ -612,7 +612,9 @@
 
 
 <h2 id="serving">Serving</h2>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">mlflow</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">mlflow</span>
 
 <span class="kn">from</span> <span class="nn">mlserve.api</span> <span class="kn">import</span> <span class="n">ApiBuilder</span>
 <span class="kn">from</span> <span class="nn">mlserve.inputs</span> <span class="kn">import</span> <span class="n">BasicInput</span>
@@ -622,8 +624,11 @@
 <span class="c1"># getting run_id</span>
 <span class="n">mlflow_client</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">tracking</span><span class="o">.</span><span class="n">MlflowClient</span><span class="p">(</span><span class="s2">&quot;http://localhost:5000&quot;</span><span class="p">)</span>
 <span class="n">run_id</span> <span class="o">=</span> <span class="n">mlflow_client</span><span class="o">.</span><span class="n">list_run_infos</span><span class="p">(</span><span class="n">experiment_id</span><span class="o">=</span><span class="mi">4</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">run_id</span>
+<span class="n">current_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">load_mlflow_model</span><span class="p">(</span><span class="s2">&quot;/app/4/</span><span class="si">{}</span><span class="s2">/artifacts/model&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">run_id</span><span class="p">))</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">load_mlflow_model</span><span class="p">(</span>
+    <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/4/</span><span class="si">{}</span><span class="s2">/artifacts/model&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_directory</span><span class="p">,</span> <span class="n">run_id</span><span class="p">)</span>
+<span class="p">)</span>
 
 
 <span class="c1"># Implement deserializer for input data</span>
