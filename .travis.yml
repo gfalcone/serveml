@@ -10,4 +10,4 @@ install:
   - bash create_dev_environment.sh
 
 script:
-  - bash run_tests.sh
+  - python -m unittest

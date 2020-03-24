@@ -1,5 +1,7 @@
 # mlserve
 
+[![Build Status](https://travis-ci.org/gfalcone/mlserve.svg?branch=master)](https://travis-ci.org/gfalcone/mlserve)
+
 `mlserve` is a Python library that helps you package your Machine Learning model easily into a REST API.
 
 The idea behind `mlserve` is to define a set of generic endpoints to make predictions easily !
