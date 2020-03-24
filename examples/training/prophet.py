@@ -28,7 +28,6 @@ class FbProphetWrapper(mlflow.pyfunc.PythonModel):
         self.model = model
         super(FbProphetWrapper, self).__init__()
 
-
     def load_context(self, context):
         from fbprophet import Prophet
         return

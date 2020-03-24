@@ -1,25 +1,14 @@
 # Setup
 
-To run the examples of the libraries we put here, we strongly recommend using Docker or a specific Virtualenv.
+To run the examples of the libraries we put here, we strongly recommend using Docker
 
-First, let's clone the repository : 
+First, let's clone the repository, build the docker container and enter it: 
 
 ````bash
 git clone https://github.com/gfalcone/mlserve
 cd mlserve
-````
-
-Let's get all the dependencies : 
-
-```bash
-pip install -r requirements.txt
-pip install -r requirements-test.txt
-```
-
-Now let's create our development environment : 
-
-````bash
-bash create_dev_environment.sh
+docker build --tag=mlserve .
+docker run -ti -p 8000:8000 mlserve bash
 ````
 
 Now we can train our models and serve them !

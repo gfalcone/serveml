@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+export MLFLOW_TRACKING_URI=http://localhost:5000
+
 python -m unittest tests.test_api
 python -m unittest tests.test_inputs
 python -m unittest tests.test_utils

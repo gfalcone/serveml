@@ -19,5 +19,5 @@ python3 -m examples.training.pytorch
 To run it :
 
 ```bash
-python3 -m examples.training.pytorch
+uvicorn examples.serving.pytorch:app --host 0.0.0.0
 ```

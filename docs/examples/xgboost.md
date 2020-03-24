@@ -19,5 +19,5 @@ python3 -m examples.training.xgboost
 To run it :
 
 ```bash
-python3 -m examples.training.xgboost
+uvicorn examples.serving.xgboost:app --host 0.0.0.0
 ```

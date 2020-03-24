@@ -19,5 +19,5 @@ python3 -m examples.training.prophet
 To run it :
 
 ```bash
-python3 -m examples.training.prophet
+uvicorn examples.serving.prophet:app --host 0.0.0.0
 ```

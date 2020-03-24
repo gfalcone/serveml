@@ -19,5 +19,5 @@ python3 -m examples.training.sklearn
 To run it : 
 
 ```bash
-python3 -m examples.training.sklearn
+uvicorn examples.serving.sklearn:app --host 0.0.0.0
 ```

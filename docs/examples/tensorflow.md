@@ -19,5 +19,5 @@ python3 -m examples.training.tensorflow
 To run it :
 
 ```bash
-python3 -m examples.training.tensorflow
+uvicorn examples.serving.tensorflow:app --host 0.0.0.0
 ```

@@ -6,22 +6,14 @@ COPY requirements-test.txt /tmp/
 RUN apt-get update && apt-get install sqlite3 && pip install -r /tmp/requirements.txt
 
 # for testing
-FROM base as test
-
 RUN pip install -r /tmp/requirements-test.txt
 
 COPY . /app/
 
 WORKDIR /app
 
-RUN bash create_dev_environment.sh && \
-    bash run_tests.sh
+ENV MLFLOW_TRACKING_URI http://localhost:5000
 
-# final image
-FROM base as final
+RUN bash create_dev_environment.sh
 
-COPY . /app/
-
-WORKDIR /app
-
-CMD ["bash", "bootstrap.sh"]
+ENTRYPOINT ["bash", "/app/bootstrap.sh"]

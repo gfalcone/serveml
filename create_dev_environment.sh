@@ -3,7 +3,6 @@
 sqlite3 /app/database.db "VACUUM;"
 mlflow server --backend-store-uri sqlite:///database.db --default-artifact-root file:///app/ --host 0.0.0.0 &
 sleep 2
-export MLFLOW_TRACKING_URI=http://localhost:5000
 mlflow experiments create -n test_sklearn
 python -m examples.training.sklearn
 mlflow experiments create -n test_pytorch

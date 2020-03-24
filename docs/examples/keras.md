@@ -19,5 +19,5 @@ python3 -m examples.training.keras
 To run it :
 
 ```bash
-python3 -m examples.training.keras
+uvicorn examples.serving.keras:app --host 0.0.0.0
 ```
