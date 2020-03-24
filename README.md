@@ -111,3 +111,15 @@ If you want to look how the documentation will be rendered after making changes 
 pip install -r requirements-doc.txt
 mkdocs serve
 ```
+
+## Contributing
+
+If you wish to make some changes, we are obviously open to Pull Requests. 
+
+Please not that in order for your PR to be merged the following points are mandatory : 
+
+- The code must be formatted with [Black](https://github.com/psf/black), here is the command to use to reformat your code : 
+```bash
+black . -l 79
+```
+- CI must be green on Travis
