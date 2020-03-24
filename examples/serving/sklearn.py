@@ -7,9 +7,9 @@ from mlserve.predictions import GenericPrediction
 # load model
 model = load_mlflow_model(
     # MlFlow model path
-    'models:/sklearn_model/1',
+    "models:/sklearn_model/1",
     # MlFlow Tracking URI
-    'http://localhost:5000',
+    "http://localhost:5000",
 )
 
 

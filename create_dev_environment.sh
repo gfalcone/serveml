@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 sqlite3 /app/database.db "VACUUM;"
-mlflow server --backend-store-uri sqlite:///database.db --default-artifact-root file:///app/ --host 0.0.0.0 &
+mlflow server \
+  --backend-store-uri sqlite:///database.db \
+  --default-artifact-root file:///app/ \
+  --host 0.0.0.0 &
 sleep 2
 mlflow experiments create -n test_sklearn
 python -m examples.training.sklearn

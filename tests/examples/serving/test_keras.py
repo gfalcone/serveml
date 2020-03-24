@@ -18,12 +18,8 @@ class TestKerasAPI(asynctest.TestCase):
         self.process = Process(
             target=uvicorn.run,
             args=(app,),
-            kwargs={
-                "host": "0.0.0.0",
-                "port": 8000,
-                "log_level": "info"
-            },
-            daemon=True
+            kwargs={"host": "0.0.0.0", "port": 8000, "log_level": "info"},
+            daemon=True,
         )
         self.process.start()
         await asyncio.sleep(5)  # time for the server to start
@@ -36,8 +32,8 @@ class TestKerasAPI(asynctest.TestCase):
         """ Fetch an endpoint from the app. """
         async with aiohttp.ClientSession() as session:
             async with session.post(
-                    "http://localhost:8000/predict/",
-                    data=json.dumps({"sequence": [1, 2]})
+                "http://localhost:8000/predict/",
+                data=json.dumps({"sequence": [1, 2]}),
             ) as resp:
                 data = await resp.json()
                 print(data)

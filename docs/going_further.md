@@ -67,6 +67,6 @@ Let's say that the data given in input of the API is not enough, and you need ad
 This could be done easily by overriding these two functions in the **GenericPrediction** class (inherited by the **AbstractPrediction** class): 
 
 
-```python hl_lines="27 28 29 30 31 32 33 34 35 36 37"
+```python hl_lines="28 29 30 31 32 33 34 35 36 37 38"
 {!./mlserve/predictions.py!}
 ```

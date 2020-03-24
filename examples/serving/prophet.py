@@ -6,9 +6,9 @@ from mlserve.predictions import GenericPrediction
 # load model
 model = load_mlflow_model(
     # MlFlow model path
-    'models:/prophet_model/1',
+    "models:/prophet_model/1",
     # MlFlow Tracking URI
-    'http://localhost:5000',
+    "http://localhost:5000",
 )
 
 

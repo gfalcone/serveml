@@ -13,12 +13,13 @@ class ApiBuilder(object):
     """
     Main class for generating an API thanks to FastAPI and Pydantic.
     """
+
     def __init__(
-            self,
-            model: AbstractPrediction,
-            predict_input_class,
-            feedback_input_class=FeedbackInput,
-            configuration_path: str = None,
+        self,
+        model: AbstractPrediction,
+        predict_input_class,
+        feedback_input_class=FeedbackInput,
+        configuration_path: str = None,
     ) -> None:
         """
         :param model: <mlserve.ml.model.AbstractModel> object that inplements
@@ -56,11 +57,11 @@ class ApiBuilder(object):
         @app.post("/predict")
         async def predict(input: predict_input_class) -> dict:
             request_uuid = self._generate_request_uuid()
-            logging.info('Begin prediction for: {}'.format(request_uuid))
+            logging.info("Begin prediction for: {}".format(request_uuid))
             prediction_result = self.model.predict(input, request_uuid)
-            logging.info('Prediction done for: {}'.format(request_uuid))
+            logging.info("Prediction done for: {}".format(request_uuid))
             return prediction_result
-        
+
     def _register_feedback_endpoint(self, app: FastAPI):
         """
         This function will register the `/feedback` endpoint on our API
@@ -70,7 +71,7 @@ class ApiBuilder(object):
         @app.post("/feedback")
         async def feedback(input: feedback_input_class) -> dict:
             request_uuid = self._generate_request_uuid()
-            return {"status": "OK", 'request_uuid': request_uuid}
+            return {"status": "OK", "request_uuid": request_uuid}
 
     def build_api(self, kwargs: dict = None):
         """
@@ -79,13 +80,14 @@ class ApiBuilder(object):
         """
         # retrieve fastapi configuration
         fastapi_configuration = (
-            self.configuration['fastapi']
-            if 'fastapi' in self.configuration.sections() else {}
+            self.configuration["fastapi"]
+            if "fastapi" in self.configuration.sections()
+            else {}
         )
 
         # to override parameters in configuration file
-        if kwargs is not None and 'fastapi' in kwargs.keys():
-            fastapi_configuration.update(kwargs.get('fastapi'))
+        if kwargs is not None and "fastapi" in kwargs.keys():
+            fastapi_configuration.update(kwargs.get("fastapi"))
 
         app = FastAPI(**fastapi_configuration)
 

@@ -14,6 +14,7 @@ import mlflow
 import mlflow.sklearn
 
 import logging
+
 logging.basicConfig(level=logging.WARN)
 logger = logging.getLogger(__name__)
 
@@ -26,18 +27,19 @@ def eval_metrics(actual, pred):
 
 
 if __name__ == "__main__":
-    mlflow.set_tracking_uri('http://localhost:5000')
+    mlflow.set_tracking_uri("http://localhost:5000")
     warnings.filterwarnings("ignore")
     np.random.seed(40)
 
     # Read the wine-quality csv file from the URL
-    csv_url =\
-        'http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv'
+    csv_url = "http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
     try:
-        data = pd.read_csv(csv_url, sep=';')
+        data = pd.read_csv(csv_url, sep=";")
     except Exception as e:
         logger.exception(
-            "Unable to download training & test CSV, check your internet connection. Error: %s", e)
+            "Unable to download training & test CSV, check your internet connection. Error: %s",
+            e,
+        )
 
     # Split the data into training and test sets. (0.75, 0.25) split.
     train, test = train_test_split(data)
@@ -71,7 +73,5 @@ if __name__ == "__main__":
         mlflow.log_metric("mae", mae)
 
         mlflow.sklearn.log_model(
-            lr,
-            "model",
-            registered_model_name='sklearn_model'
+            lr, "model", registered_model_name="sklearn_model"
         )

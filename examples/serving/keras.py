@@ -12,9 +12,9 @@ from mlserve.predictions import GenericPrediction
 # load model
 model = load_mlflow_model(
     # MlFlow model path
-    'models:/keras_model/1',
+    "models:/keras_model/1",
     # MlFlow Tracking URI
-    'http://localhost:5000',
+    "http://localhost:5000",
 )
 
 
@@ -32,7 +32,7 @@ class CustomKerasApplication(GenericPrediction):
         max_words = 1000
         tokenizer = Tokenizer(num_words=max_words)
         x_train = tokenizer.sequences_to_matrix(
-            [input.sequence], mode='binary'
+            [input.sequence], mode="binary"
         )
         return pd.DataFrame(x_train)
 

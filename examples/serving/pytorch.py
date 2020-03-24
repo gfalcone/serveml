@@ -6,9 +6,9 @@ from mlserve.predictions import GenericPrediction
 # load model
 model = load_mlflow_model(
     # MlFlow model path
-    'models:/pytorch_model/1',
+    "models:/pytorch_model/1",
     # MlFlow Tracking URI
-    'http://localhost:5000',
+    "http://localhost:5000",
 )
 
 
@@ -19,4 +19,3 @@ class LinearRegression(BasicInput):
 
 # implement application
 app = ApiBuilder(GenericPrediction(model), LinearRegression).build_api()
-

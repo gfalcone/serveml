@@ -13,6 +13,7 @@ class AbstractPrediction(ABC):
     """
     Abstract class to define methods called during predict
     """
+
     def __init__(self, model):
         self.model = model
 
@@ -61,30 +62,30 @@ class AbstractPrediction(ABC):
             - Add an uuid to the request to track request made
         """
         logging.debug(
-            'Got input: {} for request_id: {}'.format(input.dict(), uuid)
+            "Got input: {} for request_id: {}".format(input.dict(), uuid)
         )
-        logging.info('Transforming input for request: {}'.format(uuid))
+        logging.info("Transforming input for request: {}".format(uuid))
         transformed_input = self._transform_input(input)
         logging.debug(
-            'Input transformed to this: {}'.format(transformed_input)
+            "Input transformed to this: {}".format(transformed_input)
         )
-        logging.info('Fetching data for request: {}'.format(uuid))
+        logging.info("Fetching data for request: {}".format(uuid))
         fetched_data = self._fetch_data(input)
-        logging.debug('Fetched data: {}'.format(fetched_data))
+        logging.debug("Fetched data: {}".format(fetched_data))
         logging.info(
-            'Combining fetched data and input for request {}'.format(uuid)
+            "Combining fetched data and input for request {}".format(uuid)
         )
         combined_data = self._combine_fetched_data_with_input(
             fetched_data, transformed_input
         )
-        logging.debug('Combined data: {}'.format(combined_data))
-        logging.info('Applying input for request {}'.format(uuid))
+        logging.debug("Combined data: {}".format(combined_data))
+        logging.info("Applying input for request {}".format(uuid))
         output = self._apply_model(combined_data)
-        logging.debug('Prediction output: {}'.format(output))
-        logging.info('Transforming output for request {}'.format(uuid))
+        logging.debug("Prediction output: {}".format(output))
+        logging.info("Transforming output for request {}".format(uuid))
         transformed_output = self._transform_output(output)
-        logging.debug('Transformed output: {}'.format(transformed_output))
-        transformed_output['request_id'] = uuid
+        logging.debug("Transformed output: {}".format(transformed_output))
+        transformed_output["request_id"] = uuid
         return transformed_output
 
 
@@ -92,6 +93,7 @@ class GenericPrediction(AbstractPrediction):
     """
     Implementation of <mlserve.ml.model.AbstractModel> for scikit-learn
     """
+
     def _transform_input(self, input) -> pd.DataFrame:
         """
         Transforms <pydantic.BaseModel> object to <pandas.DataFrame>
@@ -121,4 +123,4 @@ class GenericPrediction(AbstractPrediction):
             result = output.to_dict()
         else:
             result = None
-        return {'result': result}
+        return {"result": result}

@@ -4,6 +4,7 @@ Example taken from https://github.com/mlflow/mlflow/blob/master/mlflow/pytorch/_
 import torch
 import mlflow
 import mlflow.pytorch
+
 # X data
 x_data = torch.Tensor([[1.0], [2.0], [3.0]])
 # Y data with its expected value: labels
@@ -47,7 +48,5 @@ for hv in [4.0, 5.0, 6.0]:
 with mlflow.start_run(experiment_id=1) as run:
     mlflow.log_param("epochs", 500)
     mlflow.pytorch.log_model(
-        model,
-        "model",
-        registered_model_name='pytorch_model'
+        model, "model", registered_model_name="pytorch_model"
     )

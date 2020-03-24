@@ -18,12 +18,8 @@ class TestPytorchAPI(asynctest.TestCase):
         self.process = Process(
             target=uvicorn.run,
             args=(app,),
-            kwargs={
-                "host": "0.0.0.0",
-                "port": 8000,
-                "log_level": "info"
-            },
-            daemon=True
+            kwargs={"host": "0.0.0.0", "port": 8000, "log_level": "info"},
+            daemon=True,
         )
         self.process.start()
         await asyncio.sleep(0.1)  # time for the server to start
@@ -36,8 +32,9 @@ class TestPytorchAPI(asynctest.TestCase):
         """ Fetch an endpoint from the app. """
         async with aiohttp.ClientSession() as session:
             async with session.post(
-                    "http://localhost:8000/predict",
-                    data=json.dumps({
+                "http://localhost:8000/predict",
+                data=json.dumps(
+                    {
                         "input_prediction": 10,
                         "chlorides": 0,
                         "citric_acid": 0,
@@ -48,8 +45,9 @@ class TestPytorchAPI(asynctest.TestCase):
                         "residual_sugar": 0,
                         "sulphates": 0,
                         "total_sulfur_dioxide": 0,
-                        "volatile_acidity": 0
-                    })
+                        "volatile_acidity": 0,
+                    }
+                ),
             ) as resp:
                 data = await resp.json()
         self.assertAlmostEqual(data["result"][0]["0"], 20, delta=1)
