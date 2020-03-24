@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-sqlite3 /app/database.db "VACUUM;"
+export BUILD_DIRECTORY=$(pwd)
 mlflow server \
   --backend-store-uri sqlite:///database.db \
-  --default-artifact-root file:///app/ \
+  --default-artifact-root file://$BUILD_DIRECTORY \
   --host 0.0.0.0 &
 sleep 2
 mlflow experiments create -n test_sklearn
