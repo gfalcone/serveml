@@ -397,11 +397,11 @@
                 
                 <h1 id="setup">Setup</h1>
 <p>To run the examples of the libraries we put here, we strongly recommend using Docker</p>
-<p>First, let's clone the repository, build the docker container and enter it: </p>
+<p>First, let's clone the repository, and setup MLflow container </p>
 <div class="codehilite"><pre><span></span><code>git clone https://github.com/gfalcone/mlserve
 <span class="nb">cd</span> mlserve
-docker build --tag<span class="o">=</span>mlserve .
-docker run -ti -p <span class="m">8000</span>:8000 mlserve bash
+docker-compose build
+docker-compose up
 </code></pre></div>
 
 
