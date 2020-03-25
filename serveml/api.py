@@ -22,7 +22,7 @@ class ApiBuilder(object):
         configuration_path: str = None,
     ) -> None:
         """
-        :param model: <mlserve.ml.model.AbstractModel> object that inplements
+        :param model: <serveml.ml.model.AbstractModel> object that inplements
         helper functions to have a proper API working.
         :param predict_input_class: <pydantic.BaseModel> object that implements the
         `/predict` input validator

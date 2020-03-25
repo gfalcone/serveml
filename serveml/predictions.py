@@ -91,7 +91,7 @@ class AbstractPrediction(ABC):
 
 class GenericPrediction(AbstractPrediction):
     """
-    Implementation of <mlserve.ml.model.AbstractModel> for scikit-learn
+    Implementation of <serveml.ml.model.AbstractModel> for scikit-learn
     """
 
     def _transform_input(self, input) -> pd.DataFrame:
@@ -112,7 +112,7 @@ class GenericPrediction(AbstractPrediction):
 
     def _transform_output(self, output) -> dict:
         """
-        Transforms output given by <mlserve.ml.sklearn._apply_model> to
+        Transforms output given by <serveml.ml.sklearn._apply_model> to
         prepare sending result with API.
         """
         if isinstance(output, np.ndarray):

@@ -1,14 +1,14 @@
-site_name: mlserve
-site_description: mlserve framework, push your machine learning models to production
+site_name: serveml
+site_description: serveml framework, push your machine learning models to production
 
 theme:
   name: 'material'
 
-repo_name: gfalcone/mlserve
-repo_url: https://github.com/gfalcone/mlserve
+repo_name: gfalcone/serveml
+repo_url: https://github.com/gfalcone/serveml
 
 nav:
-    - mlserve: 'index.md'
+    - serveml: 'index.md'
     - Features: 'features.md'
     - Examples:
         - Examples - Introduction: 'examples/index.md'
