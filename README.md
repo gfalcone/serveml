@@ -1,6 +1,6 @@
 # serveml
 
-[![Build Status](https://travis-ci.org/gfalcone/serveml.svg?branch=master)](https://travis-ci.org/gfalcone/serveml)
+[![Build Status](https://travis-ci.org/gfalcone/mlserve.svg?branch=master)](https://travis-ci.org/gfalcone/mlserve)
 
 `serveml` is a Python library that helps you package your Machine Learning model easily into a REST API.
 
