@@ -6,7 +6,7 @@ First, let's clone the repository, and setup MLflow container
 
 ````bash
 git clone https://github.com/gfalcone/serveml
-cd mlserve
+cd serveml
 docker-compose build
 docker-compose up
 ````
