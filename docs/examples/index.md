@@ -12,3 +12,9 @@ docker-compose up
 ````
 
 Now we can train our models and serve them !
+
+When you're done testing, don't forget to kill the MLflow container with : 
+
+```bash
+docker-compose down
+```

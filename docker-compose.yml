@@ -6,3 +6,5 @@ services:
       dockerfile: Dockerfile-mlflow
     ports:
       - "5000:5000"
+    volumes:
+      - /tmp/mlflow:/tmp/mlflow
