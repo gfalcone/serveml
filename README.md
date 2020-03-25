@@ -198,7 +198,6 @@ To run unit tests, do the following :
 
 ```bash
 docker build --tag=mlserve -f Dockerfile .
-docker run -ti -p 8000:8000 mlserve test
 ```
 
 ### Documentation
