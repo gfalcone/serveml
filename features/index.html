@@ -574,13 +574,13 @@
                 
                 <h1 id="features">Features</h1>
 <h2 id="machine-learning">Machine Learning</h2>
-<p><code>mlserve</code> is designed to support any Machine Learning library, and is already ready to be customized as you wish. </p>
+<p><code>serveml</code> is designed to support any Machine Learning library, and is already ready to be customized as you wish. </p>
 <p>One of the main thing Data Scientists struggle with is that they do not version their models.</p>
 <p><a href="https://mlflow.org/docs/latest/index.html">MLflow</a> already defines a way to store and retrieve models you trained and offers an easy way to version your models</p>
 <p>In order to expose any kind of Machine Learning model we defined two functions that might help you going faster in your deployment !</p>
 <h3 id="getting-a-model">Getting a model</h3>
 <p>In order to get a model, we rely heavily on MLflow, and the simplest way to do it is this way : </p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">mlserve.loader</span> <span class="kn">import</span> <span class="n">load_mlflow_model</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">serveml.loader</span> <span class="kn">import</span> <span class="n">load_mlflow_model</span>
 
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">load_mlflow_model</span><span class="p">(</span>
@@ -598,8 +598,8 @@
 <p>Handling the API - Machine Learning Model interface can be tricky. APIs often exchange data in JSON format, whereas the main format for Machine Learning predictions is a <strong>pandas.DataFrame</strong></p>
 <p>In order to avoid boilerplate code, we defined a <strong>GenericPrediction</strong> object that handles this interface for you. </p>
 <p>Here is an example on how to use it :</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">mlserve.loader</span> <span class="kn">import</span> <span class="n">load_mlflow_model</span>
-<span class="kn">from</span> <span class="nn">mlserve.predictions</span> <span class="kn">import</span> <span class="n">GenericPrediction</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">serveml.loader</span> <span class="kn">import</span> <span class="n">load_mlflow_model</span>
+<span class="kn">from</span> <span class="nn">serveml.predictions</span> <span class="kn">import</span> <span class="n">GenericPrediction</span>
 
 
 <span class="c1"># load model</span>
@@ -630,10 +630,10 @@
 <li><strong>/feedback</strong> in order to get a feedback of the prediction done (<em>EXPERIMENTAL</em>)</li>
 </ul>
 <p>The only thing you need to do is define the type of data you will provide to the <strong>/predict</strong> endpoint : </p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">mlserve.api</span> <span class="kn">import</span> <span class="n">ApiBuilder</span>
-<span class="kn">from</span> <span class="nn">mlserve.inputs</span> <span class="kn">import</span> <span class="n">BasicInput</span>
-<span class="kn">from</span> <span class="nn">mlserve.loader</span> <span class="kn">import</span> <span class="n">load_mlflow_model</span>
-<span class="kn">from</span> <span class="nn">mlserve.predictions</span> <span class="kn">import</span> <span class="n">GenericPrediction</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">serveml.api</span> <span class="kn">import</span> <span class="n">ApiBuilder</span>
+<span class="kn">from</span> <span class="nn">serveml.inputs</span> <span class="kn">import</span> <span class="n">BasicInput</span>
+<span class="kn">from</span> <span class="nn">serveml.loader</span> <span class="kn">import</span> <span class="n">load_mlflow_model</span>
+<span class="kn">from</span> <span class="nn">serveml.predictions</span> <span class="kn">import</span> <span class="n">GenericPrediction</span>
 
 
 <span class="c1"># load model</span>

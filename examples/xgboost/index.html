@@ -540,10 +540,10 @@
 
 
 <h2 id="serving">Serving</h2>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">mlserve.api</span> <span class="kn">import</span> <span class="n">ApiBuilder</span>
-<span class="kn">from</span> <span class="nn">mlserve.inputs</span> <span class="kn">import</span> <span class="n">BasicInput</span>
-<span class="kn">from</span> <span class="nn">mlserve.loader</span> <span class="kn">import</span> <span class="n">load_mlflow_model</span>
-<span class="kn">from</span> <span class="nn">mlserve.predictions</span> <span class="kn">import</span> <span class="n">GenericPrediction</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">serveml.api</span> <span class="kn">import</span> <span class="n">ApiBuilder</span>
+<span class="kn">from</span> <span class="nn">serveml.inputs</span> <span class="kn">import</span> <span class="n">BasicInput</span>
+<span class="kn">from</span> <span class="nn">serveml.loader</span> <span class="kn">import</span> <span class="n">load_mlflow_model</span>
+<span class="kn">from</span> <span class="nn">serveml.predictions</span> <span class="kn">import</span> <span class="n">GenericPrediction</span>
 
 <span class="c1"># load model</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">load_mlflow_model</span><span class="p">(</span>
