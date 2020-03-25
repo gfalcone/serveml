@@ -15,5 +15,6 @@ WORKDIR /app
 ENV MLFLOW_TRACKING_URI http://localhost:5000
 
 RUN bash create_dev_environment.sh
+RUN bash run_tests.sh
 
 ENTRYPOINT ["bash", "/app/bootstrap.sh"]
