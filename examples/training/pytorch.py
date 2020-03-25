@@ -44,8 +44,12 @@ for hv in [4.0, 5.0, 6.0]:
     hour_var = torch.Tensor([[hv]])
     y_pred = model(hour_var)
 
+experiment_name = "test_pytorch"
+if mlflow.get_experiment_by_name(experiment_name) is None:
+    mlflow.create_experiment(experiment_name)
+
 # log the model
-with mlflow.start_run(experiment_id=1) as run:
+with mlflow.start_run(experiment_id=2) as run:
     mlflow.log_param("epochs", 500)
     mlflow.pytorch.log_model(
         model, "model", registered_model_name="pytorch_model"

@@ -48,7 +48,12 @@ print("y_train shape:", y_train.shape)
 print("y_test shape:", y_test.shape)
 
 print("Building model...")
-with mlflow.start_run(experiment_id=2) as run:
+
+experiment_name = "test_keras"
+if mlflow.get_experiment_by_name(experiment_name) is None:
+    mlflow.create_experiment(experiment_name)
+
+with mlflow.start_run(experiment_id=3) as run:
     model = Sequential()
     model.add(Dense(512, input_shape=(max_words,)))
     model.add(Activation("relu"))

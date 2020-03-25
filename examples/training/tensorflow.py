@@ -84,7 +84,11 @@ parser.add_argument(
 
 
 def main(args):
-    with mlflow.start_run(experiment_id=4):
+    experiment_name = "test_tensorflow"
+    if mlflow.get_experiment_by_name(experiment_name) is None:
+        mlflow.create_experiment(experiment_name)
+
+    with mlflow.start_run(experiment_id=5):
         # Fetch the data
         (train_x, train_y), (test_x, test_y) = load_data()
 

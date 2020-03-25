@@ -45,7 +45,11 @@ def main():
     dtrain = xgb.DMatrix(X_train, label=y_train)
     dtest = xgb.DMatrix(X_test, label=y_test)
 
-    with mlflow.start_run(experiment_id=3):
+    experiment_name = "test_xgboost"
+    if mlflow.get_experiment_by_name(experiment_name) is None:
+        mlflow.create_experiment(experiment_name)
+
+    with mlflow.start_run(experiment_id=4):
 
         # train model
         params = {

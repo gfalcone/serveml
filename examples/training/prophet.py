@@ -70,8 +70,12 @@ if __name__ == "__main__":
             e,
         )
 
+    experiment_name = "test_prophet"
+    if mlflow.get_experiment_by_name(experiment_name) is None:
+        mlflow.create_experiment(experiment_name)
+
     # Useful for multiple runs (only doing one run in this sample notebook)
-    with mlflow.start_run(experiment_id=5):
+    with mlflow.start_run(experiment_id=6):
         m = Prophet()
         m.fit(df)
 

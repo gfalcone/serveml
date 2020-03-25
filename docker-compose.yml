@@ -1,0 +1,8 @@
+version: '3'
+services:
+  mlflow:
+    build:
+      context: .
+      dockerfile: Dockerfile-mlflow
+    ports:
+      - "5000:5000"
