@@ -626,7 +626,7 @@
 
 <span class="k">class</span> <span class="nc">GenericPrediction</span><span class="p">(</span><span class="n">AbstractPrediction</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Implementation of &lt;mlserve.ml.model.AbstractModel&gt; for scikit-learn</span>
+<span class="sd">    Implementation of &lt;serveml.ml.model.AbstractModel&gt; for scikit-learn</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_transform_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
@@ -647,7 +647,7 @@
 
     <span class="k">def</span> <span class="nf">_transform_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Transforms output given by &lt;mlserve.ml.sklearn._apply_model&gt; to</span>
+<span class="sd">        Transforms output given by &lt;serveml.ml.sklearn._apply_model&gt; to</span>
 <span class="sd">        prepare sending result with API.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
