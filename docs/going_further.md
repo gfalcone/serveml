@@ -14,10 +14,10 @@ version = 0.1.0
 And then to give it to your application : 
 
 ```python
-from mlserve.api import ApiBuilder
-from mlserve.inputs import BasicInput
-from mlserve.loader import load_mlflow_model
-from mlserve.predictions import GenericPrediction
+from serveml.api import ApiBuilder
+from serveml.inputs import BasicInput
+from serveml.loader import load_mlflow_model
+from serveml.predictions import GenericPrediction
 
 
 # load model
@@ -68,5 +68,5 @@ This could be done easily by overriding these two functions in the **GenericPred
 
 
 ```python hl_lines="28 29 30 31 32 33 34 35 36 37 38"
-{!./mlserve/predictions.py!}
+{!./serveml/predictions.py!}
 ```

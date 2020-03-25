@@ -4,15 +4,15 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="mlserve",
+    name="serveml",
     version="0.1",
     author="gfalcone",
     author_email="gfalcone@github.com",
-    description="mlserve is a machine learning serving tool",
+    description="serveml is a machine learning serving tool",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="http://github.com/gfalcone/mlserve",
-    packages=find_packages(),
+    packages=["serveml"],
     license="Apache",
     classifiers=[
         "Programming Language :: Python :: 3",

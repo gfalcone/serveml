@@ -2,8 +2,8 @@ import unittest
 
 import pandas as pd
 
-from mlserve.inputs import FeedbackInput
-from mlserve.utils import (
+from serveml.inputs import FeedbackInput
+from serveml.utils import (
     dict_to_pandas,
     pandas_to_dict,
     pydantic_model_to_pandas,

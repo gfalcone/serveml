@@ -2,10 +2,10 @@ import os
 
 import mlflow
 
-from mlserve.api import ApiBuilder
-from mlserve.inputs import BasicInput
-from mlserve.loader import load_mlflow_model
-from mlserve.predictions import GenericPrediction
+from serveml.api import ApiBuilder
+from serveml.inputs import BasicInput
+from serveml.loader import load_mlflow_model
+from serveml.predictions import GenericPrediction
 
 # getting run_id
 mlflow_client = mlflow.tracking.MlflowClient("http://localhost:5000")

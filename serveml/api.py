@@ -5,8 +5,8 @@ from uuid import uuid4, UUID
 
 from fastapi import FastAPI
 
-from mlserve.predictions import AbstractPrediction
-from mlserve.inputs import FeedbackInput
+from serveml.predictions import AbstractPrediction
+from serveml.inputs import FeedbackInput
 
 
 class ApiBuilder(object):

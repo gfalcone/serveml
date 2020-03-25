@@ -2,7 +2,7 @@
 
 ## Machine Learning
 
-`mlserve` is designed to support any Machine Learning library, and is already ready to be customized as you wish. 
+`serveml` is designed to support any Machine Learning library, and is already ready to be customized as you wish. 
 
 One of the main thing Data Scientists struggle with is that they do not version their models.
 
@@ -15,7 +15,7 @@ In order to expose any kind of Machine Learning model we defined two functions t
 In order to get a model, we rely heavily on MLflow, and the simplest way to do it is this way : 
 
 ```Python
-from mlserve.loader import load_mlflow_model
+from serveml.loader import load_mlflow_model
 
 
 model = load_mlflow_model(
@@ -39,8 +39,8 @@ In order to avoid boilerplate code, we defined a **GenericPrediction** object th
 Here is an example on how to use it :
 
 ```Python
-from mlserve.loader import load_mlflow_model
-from mlserve.predictions import GenericPrediction
+from serveml.loader import load_mlflow_model
+from serveml.predictions import GenericPrediction
 
 
 # load model
@@ -75,10 +75,10 @@ We defined two endpoints for you in order to avoid doing that :
 The only thing you need to do is define the type of data you will provide to the **/predict** endpoint : 
 
 ```Python
-from mlserve.api import ApiBuilder
-from mlserve.inputs import BasicInput
-from mlserve.loader import load_mlflow_model
-from mlserve.predictions import GenericPrediction
+from serveml.api import ApiBuilder
+from serveml.inputs import BasicInput
+from serveml.loader import load_mlflow_model
+from serveml.predictions import GenericPrediction
 
 
 # load model

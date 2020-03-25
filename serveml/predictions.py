@@ -5,8 +5,8 @@ from abc import ABC, abstractmethod
 import numpy as np
 import pandas as pd
 
-from mlserve.inputs import BasicInput
-from mlserve.utils import pydantic_model_to_pandas, pandas_to_dict
+from serveml.inputs import BasicInput
+from serveml.utils import pydantic_model_to_pandas, pandas_to_dict
 
 
 class AbstractPrediction(ABC):

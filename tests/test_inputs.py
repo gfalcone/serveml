@@ -2,7 +2,7 @@ import unittest
 
 from pydantic.error_wrappers import ValidationError
 
-from mlserve.inputs import FeedbackInput
+from serveml.inputs import FeedbackInput
 
 
 class TestInputs(unittest.TestCase):

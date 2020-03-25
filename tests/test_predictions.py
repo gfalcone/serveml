@@ -3,10 +3,10 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from mlserve.inputs import BasicInput, FeedbackInput
-from mlserve.loader import load_mlflow_model
-from mlserve.predictions import GenericPrediction
-from mlserve.utils import dict_to_pandas
+from serveml.inputs import BasicInput, FeedbackInput
+from serveml.loader import load_mlflow_model
+from serveml.predictions import GenericPrediction
+from serveml.utils import dict_to_pandas
 
 
 class TestGenericPrediction(unittest.TestCase):

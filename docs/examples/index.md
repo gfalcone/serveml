@@ -5,7 +5,7 @@ To run the examples of the libraries we put here, we strongly recommend using Do
 First, let's clone the repository, and setup MLflow container 
 
 ````bash
-git clone https://github.com/gfalcone/mlserve
+git clone https://github.com/gfalcone/serveml
 cd mlserve
 docker-compose build
 docker-compose up

@@ -2,9 +2,9 @@ import unittest
 
 from fastapi import FastAPI
 
-from mlserve.api import ApiBuilder
-from mlserve.loader import load_mlflow_model
-from mlserve.predictions import GenericPrediction
+from serveml.api import ApiBuilder
+from serveml.loader import load_mlflow_model
+from serveml.predictions import GenericPrediction
 from examples.serving.sklearn import WineComposition
 
 

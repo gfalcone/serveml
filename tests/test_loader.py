@@ -8,7 +8,7 @@ from sklearn.linear_model import ElasticNet
 from mlflow.exceptions import RestException
 from mlflow.tensorflow import _TF2Wrapper
 
-from mlserve.loader import load_mlflow_model
+from serveml.loader import load_mlflow_model
 
 
 class TestMLflowModelLoader(unittest.TestCase):

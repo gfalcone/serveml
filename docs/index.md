@@ -1,8 +1,8 @@
-# mlserve
+# serveml
 
-`mlserve` is a Python library that helps you package your Machine Learning model easily into a REST API.
+`serveml` is a Python library that helps you package your Machine Learning model easily into a REST API.
 
-The idea behind `mlserve` is to define a set of generic endpoints to make predictions easily !
+The idea behind `serveml` is to define a set of generic endpoints to make predictions easily !
 
 ## Philosophy
 
@@ -10,9 +10,9 @@ The recent surge of interest in harnessing Machine Learning to solve business pr
 
 Data Scientists often struggle with the technology gap between their development environment and the production environment for a lot of reasons (scalability, notebook code not ready for production, ...). 
 
-The goal of `mlserve` is to reduce this gap by offering a simple way to package the model behind a REST API.
+The goal of `serveml` is to reduce this gap by offering a simple way to package the model behind a REST API.
 
-`mlserve` is not the first library to help packaging of ML models behind API, but aims to be a complete one. 
+`serveml` is not the first library to help packaging of ML models behind API, but aims to be a complete one. 
 
 The main goals of this library is to :
 
@@ -28,7 +28,7 @@ These points are mainly solved thanks to :
 
 ## Libraries supported
 
-`mlserve` is designed to support any Machine Learning library you want to use.
+`serveml` is designed to support any Machine Learning library you want to use.
 
 As it is tightly coupled with MLflow to handle model retrieving, it supports all libraries supported by MLflow out-of-the-box.'
 
@@ -43,5 +43,5 @@ Python 3.6+ (for FastAPI)
 ## Installation
 
 ```bash
-pip install mlserve
+pip install serveml
 ```
