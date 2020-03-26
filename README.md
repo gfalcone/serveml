@@ -37,6 +37,7 @@ You'll need to do the following things to set up MLflow on your local machine :
 ```bash
 git clone https://github.com/gfalcone/serveml
 cd serveml
+mkdir -p /tmp/mlflow
 docker-compose build
 docker-compose up
 ```
