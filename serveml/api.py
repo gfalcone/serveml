@@ -20,6 +20,7 @@ class ApiBuilder(object):
         predict_input_class,
         feedback_input_class=FeedbackInput,
         configuration_path: str = None,
+        api_prefix: str = "",
     ) -> None:
         """
         :param model: <serveml.ml.model.AbstractModel> object that inplements
@@ -32,6 +33,7 @@ class ApiBuilder(object):
         self.feedback_input_class = feedback_input_class
         self.configuration = configparser.ConfigParser()
         self.load_configuration(configuration_path)
+        self.api_prefix = api_prefix
 
     def load_configuration(self, configuration_path: str) -> None:
         """
@@ -89,10 +91,17 @@ class ApiBuilder(object):
         if kwargs is not None and "fastapi" in kwargs.keys():
             fastapi_configuration.update(kwargs.get("fastapi"))
 
-        app = FastAPI(**fastapi_configuration)
+        app = FastAPI(openapi_prefix=self.api_prefix, **fastapi_configuration)
 
         # registering endpoints
         self._register_predict_endpoint(app)
         self._register_feedback_endpoint(app)
 
-        return app
+        # handle the prefix
+        if self.api_prefix != "":
+            main_app = FastAPI()
+            main_app.mount(self.api_prefix, app)
+        else:
+            main_app = app
+
+        return main_app
