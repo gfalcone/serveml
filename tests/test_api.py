@@ -21,6 +21,11 @@ class TestApiBuilder(unittest.TestCase):
             predict_input_class=WineComposition,
             configuration_path="api.cfg",
         )
+        self.api_builder_with_api_prefix = ApiBuilder(
+            model=GenericPrediction(model),
+            predict_input_class=WineComposition,
+            api_prefix="/api/sklearn_model/v1",
+        )
 
     def test_load_configuration(self):
         fast_api_configuration = {
@@ -56,3 +61,8 @@ class TestApiBuilder(unittest.TestCase):
         self.assertIn("/feedback", paths)
         self.assertIn("/docs", paths)
         self.assertIn("/redoc", paths)
+
+    def test_build_api_with_api_prefix(self):
+        app = self.api_builder_with_api_prefix.build_api()
+        paths = list(map(lambda x: x.path, app.router.routes))
+        self.assertIn("/api/sklearn_model/v1", paths)

@@ -18,7 +18,9 @@ nav:
         - Sklearn: 'examples/sklearn.md'
         - Tensorflow: 'examples/tensorflow.md'
         - Xgboost: 'examples/xgboost.md'
-    - Going further: 'going_further.md'
+    - Going further:
+        - Serveml Advanced Features : 'going_further/advanced_features.md'
+        - Proxy : 'going_further/proxy.md'
 
 
 markdown_extensions:
