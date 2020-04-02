@@ -8,7 +8,7 @@ with open("requirements.txt") as f:
 
 setup(
     name="serveml",
-    version="0.2.1",
+    version="0.3.0",
     author="gfalcone",
     author_email="gfalcone@github.com",
     description="serveml is a machine learning serving tool",
