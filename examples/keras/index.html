@@ -390,10 +390,46 @@
       
 
 
-  <li class="md-nav__item">
-    <a href="../../going_further/" title="Going further" class="md-nav__link">
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
       Going further
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Going further
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../going_further/advanced_features/" title="Serveml Advanced Features" class="md-nav__link">
+      Serveml Advanced Features
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../going_further/proxy/" title="Proxy" class="md-nav__link">
+      Proxy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
     
@@ -466,6 +502,8 @@
 <span class="c1"># The following import and function call are the only additions to code required</span>
 <span class="c1"># to automatically log metrics and parameters to MLflow.</span>
 <span class="kn">import</span> <span class="nn">mlflow.keras</span>
+
+<span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s2">&quot;http://localhost:5000&quot;</span><span class="p">)</span>
 
 <span class="n">mlflow</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">autolog</span><span class="p">()</span>
 
