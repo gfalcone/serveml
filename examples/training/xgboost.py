@@ -46,6 +46,9 @@ def main():
     dtest = xgb.DMatrix(X_test, label=y_test)
 
     experiment_name = "test_xgboost"
+
+    mlflow.set_tracking_uri("http://localhost:5000")
+
     if mlflow.get_experiment_by_name(experiment_name) is None:
         mlflow.create_experiment(experiment_name)
 

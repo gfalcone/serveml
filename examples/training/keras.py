@@ -14,6 +14,8 @@ from keras.preprocessing.text import Tokenizer
 # to automatically log metrics and parameters to MLflow.
 import mlflow.keras
 
+mlflow.set_tracking_uri("http://localhost:5000")
+
 mlflow.keras.autolog()
 
 max_words = 1000

@@ -2,7 +2,7 @@ import unittest
 
 import pandas as pd
 
-from serveml.inputs import FeedbackInput
+from serveml.inputs import BasicFeedbackInput
 from serveml.utils import (
     dict_to_pandas,
     pandas_to_dict,
@@ -23,7 +23,7 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(pandas_to_dict(df), [item])
 
     def test_pydantic_model_to_pandas(self):
-        feedback = FeedbackInput(status=True, request_id="coconut")
+        feedback = BasicFeedbackInput(status=True, request_id="coconut")
         result = pydantic_model_to_pandas(feedback)
         item = {
             "request_id": "coconut",

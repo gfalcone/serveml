@@ -1,12 +1,13 @@
 import configparser
 import logging
 
-from uuid import uuid4, UUID
+from uuid import uuid4
 
 from fastapi import FastAPI
 
 from serveml.predictions import AbstractPrediction
-from serveml.inputs import FeedbackInput
+from serveml.inputs import BasicFeedbackInput
+from serveml.outputs import BasicFeedbackOutput
 
 
 class ApiBuilder(object):
@@ -18,7 +19,9 @@ class ApiBuilder(object):
         self,
         model: AbstractPrediction,
         predict_input_class,
-        feedback_input_class=FeedbackInput,
+        predict_output_class=None,
+        feedback_input_class=BasicFeedbackInput,
+        feedback_output_class=None,
         configuration_path: str = None,
         api_prefix: str = "",
     ) -> None:
@@ -30,7 +33,9 @@ class ApiBuilder(object):
         """
         self.model = model
         self.predict_input_class = predict_input_class
+        self.predict_output_class = predict_output_class
         self.feedback_input_class = feedback_input_class
+        self.feedback_output_class = feedback_output_class
         self.configuration = configparser.ConfigParser()
         self.load_configuration(configuration_path)
         self.api_prefix = api_prefix
@@ -43,20 +48,21 @@ class ApiBuilder(object):
             self.configuration.read(configuration_path)
 
     @staticmethod
-    def _generate_request_uuid() -> UUID:
+    def _generate_request_uuid() -> str:
         """
         Helper function to generate a unique request_id to have a unique
         identifier of the request made.
         """
-        return uuid4()
+        return str(uuid4())
 
     def _register_predict_endpoint(self, app: FastAPI):
         """
         This function will register the `/predict` endpoint on our API
         """
         predict_input_class = self.predict_input_class
+        predict_output_class = self.predict_output_class
 
-        @app.post("/predict")
+        @app.post("/predict", response_model=predict_output_class)
         async def predict(input: predict_input_class) -> dict:
             request_uuid = self._generate_request_uuid()
             logging.info("Begin prediction for: {}".format(request_uuid))
@@ -69,11 +75,12 @@ class ApiBuilder(object):
         This function will register the `/feedback` endpoint on our API
         """
         feedback_input_class = self.feedback_input_class
+        feedback_output_class = self.feedback_output_class
 
-        @app.post("/feedback")
+        @app.post("/feedback", response_model=feedback_output_class)
         async def feedback(input: feedback_input_class) -> dict:
             request_uuid = self._generate_request_uuid()
-            return {"status": "OK", "request_uuid": request_uuid}
+            return {"status": True, "request_id": request_uuid}
 
     def build_api(self, kwargs: dict = None):
         """

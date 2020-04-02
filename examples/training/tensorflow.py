@@ -73,6 +73,8 @@ def eval_input_fn(features, labels, batch_size):
     return dataset
 
 
+mlflow.set_tracking_uri("http://localhost:5000")
+
 # Enable auto-logging to MLflow to capture TensorBoard metrics.
 mlflow.tensorflow.autolog()
 
