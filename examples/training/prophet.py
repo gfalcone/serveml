@@ -70,6 +70,8 @@ if __name__ == "__main__":
             e,
         )
 
+    mlflow.set_tracking_uri("http://localhost:5000")
+
     experiment_name = "test_prophet"
     if mlflow.get_experiment_by_name(experiment_name) is None:
         mlflow.create_experiment(experiment_name)

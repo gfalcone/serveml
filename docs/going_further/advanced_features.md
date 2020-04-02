@@ -70,3 +70,62 @@ This could be done easily by overriding these two functions in the **GenericPred
 ```python hl_lines="28 29 30 31 32 33 34 35 36 37 38"
 {!./serveml/predictions.py!}
 ```
+
+## Defining outputs for **/predict** and **/feedback**
+
+By default, we do not define output models for both **/predict** and **/feedback** endpoints.
+
+But you can specify them if you wish to. Here is how : 
+
+````python
+from typing import List
+
+from serveml.api import ApiBuilder
+from serveml.inputs import BasicInput
+from serveml.loader import load_mlflow_model
+from serveml.outputs import BasicFeedbackOutput, BasicPredictOutput
+from serveml.predictions import GenericPrediction
+
+
+# load model
+model = load_mlflow_model(
+    # MlFlow model path
+    'models:/sklearn_model/1',
+    # MlFlow Tracking URI
+    'http://localhost:5000',
+)
+
+
+# Implement deserializer for input data
+class WineComposition(BasicInput):
+    alcohol: float
+    chlorides: float
+    citric_acid: float
+    density: float
+    fixed_acidity: float
+    free_sulfur_dioxide: int
+    pH: float
+    residual_sugar: float
+    sulphates: float
+    total_sulfur_dioxide: int
+    volatile_acidity: int
+
+
+# Implement deserializer for /predict output data
+class WineQuality(BasicPredictOutput):
+    result: List[float]
+
+
+# Implement deserializer for /predict output data
+class WineFeedbackOutput(BasicFeedbackOutput):
+    status: bool
+
+
+# implement application
+app = ApiBuilder(
+    GenericPrediction(model),
+    WineComposition,
+    predict_output_class=WineQuality,
+    feedback_output_class=WineFeedbackOutput
+).build_api()
+````

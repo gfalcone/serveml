@@ -3,7 +3,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from serveml.inputs import BasicInput, FeedbackInput
+from serveml.inputs import BasicInput, BasicFeedbackInput
 from serveml.loader import load_mlflow_model
 from serveml.predictions import GenericPrediction
 from serveml.utils import dict_to_pandas
@@ -33,7 +33,7 @@ class TestGenericPrediction(unittest.TestCase):
             "status": True,
             "expected_result": "coco",
         }
-        result = self.prediction._transform_input(FeedbackInput(**item))
+        result = self.prediction._transform_input(BasicFeedbackInput(**item))
         self.assertTrue(result.equals(dict_to_pandas(item)))
 
     def test__apply_model(self):

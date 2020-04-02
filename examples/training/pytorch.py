@@ -44,6 +44,8 @@ for hv in [4.0, 5.0, 6.0]:
     hour_var = torch.Tensor([[hv]])
     y_pred = model(hour_var)
 
+mlflow.set_tracking_uri("http://localhost:5000")
+
 experiment_name = "test_pytorch"
 if mlflow.get_experiment_by_name(experiment_name) is None:
     mlflow.create_experiment(experiment_name)

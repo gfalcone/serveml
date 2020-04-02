@@ -1,7 +1,7 @@
 from pydantic import BaseModel as BasicInput
 
 
-class FeedbackInput(BasicInput):
+class BasicFeedbackInput(BasicInput):
     """
     Basic input validator for feedbacks
     """
